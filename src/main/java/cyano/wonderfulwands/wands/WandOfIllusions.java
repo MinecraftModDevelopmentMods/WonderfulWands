@@ -5,7 +5,6 @@ import cyano.wonderfulwands.blocks.IllusoryBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -52,7 +51,6 @@ public class WandOfIllusions extends Wand {
 		
 	}
 	
-	private final ItemStack fauxPick = new ItemStack(Items.STONE_PICKAXE);
 	/**
 	 * turns block into illusion
 	 * @param playerEntity

@@ -40,9 +40,9 @@ public class WandOfLevitation extends Wand {
 	}
 
 
-	@Override public ActionResult<ItemStack> onItemRightClick(ItemStack srcItemStack, World world, EntityPlayer playerEntity, EnumHand hand){
+	@Override public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer playerEntity, EnumHand hand){
 		playerEntity.setActiveHand(hand);
-		return  new ActionResult(EnumActionResult.SUCCESS, srcItemStack);
+		return  new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerEntity.getHeldItemMainhand());
 	}
 
 	/**

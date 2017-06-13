@@ -32,9 +32,9 @@ public class WandOfMagicMissile extends Wand {
 		return cooldown;
 	}
 
-	@Override public ActionResult<ItemStack> onItemRightClick(ItemStack srcItemStack, World world, EntityPlayer playerEntity, EnumHand hand){
+	@Override public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer playerEntity, EnumHand hand){
 		playerEntity.setActiveHand(hand);
-		return  new ActionResult(EnumActionResult.SUCCESS, srcItemStack);
+		return  new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerEntity.getHeldItemMainhand());
 	}
 	
 	 /**
@@ -75,7 +75,7 @@ public class WandOfMagicMissile extends Wand {
 
 	        if (!world.isRemote)
 	        {
-	            world.spawnEntityInWorld(new EntityMagicMissile(world, playerEntity));
+	            world.spawnEntity(new EntityMagicMissile(world, playerEntity));
 	        }
 	        return srcItemStack;
 	    }

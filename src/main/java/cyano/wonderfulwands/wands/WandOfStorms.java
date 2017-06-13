@@ -24,8 +24,6 @@ public class WandOfStorms extends Wand  {
 	public static int defaultCharges = 64;
 	
 	public static final int AOEdiameter = 64;
-	private static final int AOEsubtractor = -1 * AOEdiameter / 2;
-	
 	public WandOfStorms() {
 		super(defaultCharges);
 		this.setUnlocalizedName(WonderfulWands.MODID +"_"+ itemName);
@@ -40,9 +38,9 @@ public class WandOfStorms extends Wand  {
 	@Override public int getMaxItemUseDuration(ItemStack par1ItemStack){
 		return cooldown;
 	}
-	@Override public ActionResult<ItemStack> onItemRightClick(ItemStack srcItemStack, World world, EntityPlayer playerEntity, EnumHand hand){
+	@Override public ActionResult<ItemStack> onItemRightClick( World world, EntityPlayer playerEntity, EnumHand hand){
 		playerEntity.setActiveHand(hand);
-		return  new ActionResult(EnumActionResult.SUCCESS, srcItemStack);
+		return  new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerEntity.getHeldItemMainhand());
 	}
 
 	/**

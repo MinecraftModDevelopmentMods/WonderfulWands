@@ -17,7 +17,7 @@ public class Fireball extends EntityLargeFireball{
 	    {
 	        super(par1World, par2EntityLivingBase, vX, vY, vZ);
 	        this.setPosition(posX, posY, posZ);
-	        Double d3 = (double) MathHelper.sqrt_double(vX * vX + vY * vY + vZ * vZ);
+	        Double d3 = (double) MathHelper.sqrt(vX * vX + vY * vY + vZ * vZ);
 	        this.accelerationX = vX / d3 * 0.1D;
 	        this.accelerationY = vY / d3 * 0.1D;
 	        this.accelerationZ = vZ / d3 * 0.1D;
@@ -26,15 +26,15 @@ public class Fireball extends EntityLargeFireball{
 	@Override
 	protected void onImpact(RayTraceResult impact)
 	{
-		if (!this.worldObj.isRemote)
+		if (!this.world.isRemote)
 		{
 			double radius = 2.0;
 			if(impact.hitVec != null){
 				AxisAlignedBB aoe = new AxisAlignedBB(impact.hitVec.xCoord-radius,impact.hitVec.yCoord-radius,impact.hitVec.zCoord-radius,
 						impact.hitVec.xCoord+radius,impact.hitVec.yCoord+radius,impact.hitVec.zCoord+radius);
-				List<EntityLivingBase> collateralDamage = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, aoe);
+				List<EntityLivingBase> collateralDamage = world.getEntitiesWithinAABB(EntityLivingBase.class, aoe);
 				for(EntityLivingBase victim : collateralDamage){
-					victim.attackEntityFrom(DamageSource.magic, 5);
+					victim.attackEntityFrom(DamageSource.MAGIC, 5);
 					victim.setFire(5);
 				}
 			}

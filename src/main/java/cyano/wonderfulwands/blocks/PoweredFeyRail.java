@@ -32,11 +32,11 @@ public class PoweredFeyRail extends BlockRailPowered {
 		if (isPowered != wasPowered)
 		{
 			worldIn.setBlockState(pos, state.withProperty(POWERED, Boolean.valueOf(isPowered)), 3);
-			worldIn.notifyNeighborsOfStateChange(pos.down(), this);
+			worldIn.notifyNeighborsOfStateChange(pos.down(), this, isPowered);
 
 			if (((BlockRailBase.EnumRailDirection)state.getValue(SHAPE)).isAscending())
 			{
-				worldIn.notifyNeighborsOfStateChange(pos.up(), this);
+				worldIn.notifyNeighborsOfStateChange(pos.up(), this, isPowered);
 			}
 		}
 	}

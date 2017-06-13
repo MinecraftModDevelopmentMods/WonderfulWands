@@ -31,7 +31,7 @@ public class DeathSkull extends EntityWitherSkull {
 	    {
 	        super(par1World, par2EntityLivingBase, vX, vY, vZ);
 	        this.setPosition(posX, posY, posZ);
-	        Double d3 = (double) MathHelper.sqrt_double(vX * vX + vY * vY + vZ * vZ);
+	        Double d3 = (double) MathHelper.sqrt(vX * vX + vY * vY + vZ * vZ);
 	        this.accelerationX = vX / d3 * 0.1D;
 	        this.accelerationY = vY / d3 * 0.1D;
 	        this.accelerationZ = vZ / d3 * 0.1D;
@@ -49,23 +49,23 @@ public class DeathSkull extends EntityWitherSkull {
 	@Override
 	protected void onImpact(RayTraceResult impact)
 	{
-		if (!this.worldObj.isRemote)
+		if (!this.world.isRemote)
 		{
 			if(impact.entityHit != null ){
-				impact.entityHit.attackEntityFrom(DamageSource.magic, 21);
+				impact.entityHit.attackEntityFrom(DamageSource.MAGIC, 21);
 			}
 			double radius = 3;
 			if(impact.hitVec != null){
 				AxisAlignedBB aoe = new AxisAlignedBB(impact.hitVec.xCoord-radius,impact.hitVec.yCoord-radius,impact.hitVec.zCoord-radius,
 						impact.hitVec.xCoord+radius,impact.hitVec.yCoord+radius,impact.hitVec.zCoord+radius);
-				List<EntityLivingBase> collateralDamage = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, aoe);
+				List<EntityLivingBase> collateralDamage = world.getEntitiesWithinAABB(EntityLivingBase.class, aoe);
 				PotionEffect wither = new PotionEffect(Potion.getPotionFromResourceLocation("wither"), 210, 1);
 				for(EntityLivingBase victim : collateralDamage){
 					victim.addPotionEffect(wither);
-					victim.attackEntityFrom(DamageSource.magic, 10);
+					victim.attackEntityFrom(DamageSource.MAGIC, 10);
 				}
 			}
-			this.worldObj.newExplosion(this, this.posX, this.posY, this.posZ, explosionForce, false, this.worldObj.getGameRules().getBoolean("mobGriefing"));
+			this.world.newExplosion(this, this.posX, this.posY, this.posZ, explosionForce, false, this.world.getGameRules().getBoolean("mobGriefing"));
 			this.setDead();
 		}
 	}

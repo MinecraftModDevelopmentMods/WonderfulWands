@@ -23,6 +23,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -212,11 +213,6 @@ public class WonderfulWands {
 		
 		// recipes
 
-		// add crafting recipes (3X3 shaped)
-		// Item stack (ID, Count, Meta)
-		ItemStack x;
-		ItemStack output;
-
 		// Nonmagical
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(wandGeneric), " g ", " s ", " g ", 'g', "nuggetGold", 's',"stickWood"));
 		// Magic Missile
@@ -262,8 +258,7 @@ public class WonderfulWands {
 		// wand of tunneling
 		addWandRecipe(wandOfTunneling,Items.DIAMOND_PICKAXE);
 		
-		// Wizarding Robes
-		int robesRenderIndex = proxy.getArmorRenderIndex(MODID+"_robes");
+		proxy.getArmorRenderIndex(MODID+"_robes");
 		for(int colorIndex = 0; colorIndex < 16; colorIndex++){
 			int slotIndex = 0;
 			for(int i = 0; i < 4; i++){
@@ -369,11 +364,11 @@ public class WonderfulWands {
 		// register entities
 		registerItemRenders();
 
- 		EntityRegistry.registerModEntity(EntityMagicMissile.class, "magic_missile", 0/*id*/, this, 128/*trackingRange*/, 1/*updateFrequency*/, true/*sendsVelocityUpdates*/);
+ 		EntityRegistry.registerModEntity(new ResourceLocation("magic_missle"), EntityMagicMissile.class, "magic_missile", 0/*id*/, this, 128/*trackingRange*/, 1/*updateFrequency*/, true/*sendsVelocityUpdates*/);
 
- 		EntityRegistry.registerModEntity(EntityWandLightningBolt.class, "bolt_lightning", 1/*id*/, this, 128/*trackingRange*/, 1/*updateFrequency*/, false/*sendsVelocityUpdates*/);
+ 		EntityRegistry.registerModEntity(new ResourceLocation("lighting_bolt"), EntityWandLightningBolt.class, "bolt_lightning", 1/*id*/, this, 128/*trackingRange*/, 1/*updateFrequency*/, false/*sendsVelocityUpdates*/);
 
- 		EntityRegistry.registerModEntity(EntityLightWisp.class, "WispLight", 2/*id*/, this, 128/*trackingRange*/, 1/*updateFrequency*/, true/*sendsVelocityUpdates*/);
+ 		EntityRegistry.registerModEntity(new ResourceLocation("light_wisp"), EntityLightWisp.class, "WispLight", 2/*id*/, this, 128/*trackingRange*/, 1/*updateFrequency*/, true/*sendsVelocityUpdates*/);
  		
  		robesTab.setIcon(witchHat);
  		wandsTab.setIcon(wandGeneric);
@@ -469,7 +464,7 @@ public class WonderfulWands {
 			return "null class";
 		}
 		StringBuilder sb = new StringBuilder();
-		Class c = o.getClass();
+		Class<?> c = o.getClass();
 		sb.append(c.getName()).append("\n");
 		do{
 			Field[] fields = c.getDeclaredFields();

@@ -47,9 +47,9 @@ public class WandOfGreaterLight extends Wand {
         return EnumAction.BOW;
     }
 
-	@Override public ActionResult<ItemStack> onItemRightClick(ItemStack srcItemStack, World world, EntityPlayer playerEntity, EnumHand hand){
+	@Override public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer playerEntity, EnumHand hand){
 		playerEntity.setActiveHand(hand);
-		return  new ActionResult(EnumActionResult.SUCCESS, srcItemStack);
+		return  new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerEntity.getHeldItemMainhand());
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class WandOfGreaterLight extends Wand {
 			e[7] = new EntityLightWisp(world,center.add( 0, 0,  1));
 			e[8] = new EntityLightWisp(world,center.add( 1, 0,  1));
 			for(int i = 0; i < e.length; i++){
-				world.spawnEntityInWorld(e[i]);
+				world.spawnEntity(e[i]);
 			}
 		}
 		

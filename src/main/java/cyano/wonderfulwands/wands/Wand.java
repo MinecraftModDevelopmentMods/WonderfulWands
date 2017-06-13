@@ -62,8 +62,8 @@ public abstract class Wand extends Item {
     public abstract int getBaseRepairCost();
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World w, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ){
-		if(onItemUse(stack,player,w,pos,facing,hitX,hitY,hitZ)){
+	public EnumActionResult onItemUse(EntityPlayer player, World w, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ){
+		if(onItemUse(player.getHeldItemMainhand(),player,w,pos, facing,hitX,hitY,hitZ)){
 			return EnumActionResult.SUCCESS;
 		}
 		return EnumActionResult.PASS;
@@ -73,7 +73,7 @@ public abstract class Wand extends Item {
 
     
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean b){
+	public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean b){
 		super.addInformation(stack,player,list,b);
 		StringBuilder sb = new StringBuilder();
 		int max = stack.getMaxDamage() - 1;
