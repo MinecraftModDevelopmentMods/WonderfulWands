@@ -42,7 +42,7 @@ public class WandOfLightning extends Wand {
 
 	@Override public ActionResult<ItemStack> onItemRightClick(ItemStack srcItemStack, World world, EntityPlayer playerEntity, EnumHand hand){
 		playerEntity.setActiveHand(hand);
-		return  new ActionResult(EnumActionResult.SUCCESS, srcItemStack);
+		return  new ActionResult<ItemStack>(EnumActionResult.SUCCESS, srcItemStack);
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class WandOfLightning extends Wand {
 			//			playerEntity.posX+range,playerEntity.posY+range,playerEntity.posZ+range);
 			AxisAlignedBB bb = new AxisAlignedBB(playerEntity.posX-range,playerEntity.posY-range,playerEntity.posZ-range,
 					playerEntity.posX+range,playerEntity.posY+range,playerEntity.posZ+range);
-			List entities = world.getEntitiesWithinAABB(EntityLivingBase.class, bb); // ArrayList<EntityLivingBase> 
+			List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, bb); // ArrayList<EntityLivingBase> 
 			for(int i = 0; i < entities.size(); i++){
 				if(!(entities.get(i) instanceof EntityLivingBase)) continue;
 				EntityLivingBase e = (EntityLivingBase) entities.get(i);
@@ -144,7 +144,7 @@ public class WandOfLightning extends Wand {
 			playFadedSound(world,playerEntity.getPositionVector(),64, SoundEvents.ENTITY_GENERIC_EXPLODE,4F,1.7F);
 			playSound(world,playerEntity.getPositionVector(),64, SoundEvents.ENTITY_LIGHTNING_THUNDER,1F,1.7F);
 
-			world.spawnEntityInWorld(new EntityWandLightningBolt(world, 
+			world.spawnEntity(new EntityWandLightningBolt(world, 
 					playerEntity,playerEntity.posX,playerEntity.posY+1,playerEntity.posZ, 
 					playerEntity.rotationYaw, playerEntity.rotationPitch, range / rangeMax));
 		}

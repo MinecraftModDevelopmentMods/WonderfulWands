@@ -3,6 +3,7 @@ package cyano.wonderfulwands.wands;
 import cyano.wonderfulwands.WonderfulWands;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStoneBrick;
+import net.minecraft.block.BlockStoneBrick.EnumType;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +23,7 @@ public class WandOfGrowth extends Wand {
 	
 	public static int defaultCharges = 128;
 	
-	static final PropertyEnum stoneblockVariantKey = PropertyEnum.create("variant", BlockStoneBrick.EnumType.class);
+	static final PropertyEnum<EnumType> stoneblockVariantKey = PropertyEnum.create("variant", BlockStoneBrick.EnumType.class);
 	
 	public WandOfGrowth() {
 		super(defaultCharges);

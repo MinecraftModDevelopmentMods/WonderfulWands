@@ -60,7 +60,7 @@ public class WandOfBridging extends Wand {
 
 	@Override public ActionResult<ItemStack> onItemRightClick(ItemStack srcItemStack, World world, EntityPlayer playerEntity, EnumHand hand){
 		playerEntity.setActiveHand(hand);
-		return  new ActionResult(EnumActionResult.SUCCESS, srcItemStack);
+		return  new ActionResult<ItemStack>(EnumActionResult.SUCCESS, srcItemStack);
 	}
 
 	@Override public void onPlayerStoppedUsing(ItemStack srcItemStack, World world, EntityLivingBase playerEntity, int timeRemain){

@@ -65,9 +65,9 @@ public class EntityLightWisp extends net.minecraft.entity.EntityLivingBase{
 	@Override
 	public void onEntityUpdate(){
 		super.onEntityUpdate();
-		if(worldObj.isRemote)return;
+		if(world.isRemote)return;
 		--lifeCounter;
-		long time = this.worldObj.getTotalWorldTime();
+		long time = this.world.getTotalWorldTime();
 		if(time > nextUpdateTime){
 			nextUpdateTime = time + UPDATE_INTERVAL;
 			BlockPos blockCoord = this.getPosition();
@@ -80,7 +80,7 @@ public class EntityLightWisp extends net.minecraft.entity.EntityLivingBase{
 			lastPos = blockCoord;
 		}
 		if(lifeCounter <= 0){
-			worldObj.removeEntity(this);
+			world.removeEntity(this);
 		}
 	}
 
@@ -107,21 +107,21 @@ public class EntityLightWisp extends net.minecraft.entity.EntityLivingBase{
 
 	private int getLight(BlockPos coord){
 		if(coord.getY() < 0 || coord.getY() > 255) return 16;
-		IBlockState bs = worldObj.getBlockState(coord);
+		IBlockState bs = world.getBlockState(coord);
 		if(bs.isFullBlock()) return 16;
-		if(!(worldObj.getChunkFromBlockCoords(coord).isLoaded())) return 16;
-		return worldObj.getChunkFromBlockCoords(coord).getLightFor(EnumSkyBlock.BLOCK, coord);
+		if(!(world.getChunkFromBlockCoords(coord).isLoaded())) return 16;
+		return world.getChunkFromBlockCoords(coord).getLightFor(EnumSkyBlock.BLOCK, coord);
 	}
 	
 	private boolean canPlace(BlockPos coord){
-		return worldObj.isAirBlock(coord);
+		return world.isAirBlock(coord);
 	}
 	
 	
 	public void turnIntoMageLight(){
-		worldObj.setBlockState(getPosition(), WonderfulWands.mageLight.getDefaultState());
+		world.setBlockState(getPosition(), WonderfulWands.mageLight.getDefaultState());
 		this.isDead = true;
-		worldObj.removeEntity(this);
+		world.removeEntity(this);
 	}
 
 	
@@ -177,14 +177,14 @@ public class EntityLightWisp extends net.minecraft.entity.EntityLivingBase{
 	}
 
 	private BlockPos moveToGroundLevel(BlockPos coord){
-		if(worldObj.isAirBlock(coord)){
+		if(world.isAirBlock(coord)){
 			BlockPos down = coord.down();
-			while(worldObj.isAirBlock(down) && down.getY() > 0){
+			while(world.isAirBlock(down) && down.getY() > 0){
 				coord = down;
 				down = coord.down();
 			}
 		}else{
-			while(!worldObj.isAirBlock(coord) && coord.getY() < 255){
+			while(!world.isAirBlock(coord) && coord.getY() < 255){
 				coord = coord.up();
 			}
 		}

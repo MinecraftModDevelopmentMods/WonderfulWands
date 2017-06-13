@@ -40,7 +40,7 @@ public class WandOfLight extends Wand {
 
 	@Override  public ActionResult<ItemStack> onItemRightClick(ItemStack srcItemStack, World world, EntityPlayer playerEntity, EnumHand hand){
 		playerEntity.setActiveHand(hand);
-		return  new ActionResult(EnumActionResult.SUCCESS, srcItemStack);
+		return  new ActionResult<ItemStack>(EnumActionResult.SUCCESS, srcItemStack);
 	 }
 	@Override public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord, EnumFacing blockFace, float par8, float par9, float par10){
 		return false;

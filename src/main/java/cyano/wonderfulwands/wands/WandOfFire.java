@@ -37,7 +37,7 @@ public class WandOfFire extends Wand  {
 
 	@Override public ActionResult<ItemStack> onItemRightClick(ItemStack srcItemStack, World world, EntityPlayer playerEntity, EnumHand hand){
 		playerEntity.setActiveHand(hand);
-		return  new ActionResult(EnumActionResult.SUCCESS, srcItemStack);
+		return  new ActionResult<ItemStack>(EnumActionResult.SUCCESS, srcItemStack);
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class WandOfFire extends Wand  {
 			double deltaX = (double)(-MathHelper.sin(playerEntity.rotationYaw / 180.0F * (float)Math.PI));
 			double deltaZ = (double)( MathHelper.cos(playerEntity.rotationYaw / 180.0F * (float)Math.PI));
 			Fireball fireball = new Fireball(world,playerEntity, playerEntity.posX+deltaX,playerEntity.posY+1,playerEntity.posZ+deltaZ,  vecX, vecY, vecZ);
-			world.spawnEntityInWorld(fireball);
+			world.spawnEntity(fireball);
 		}
 		return srcItemStack;
 	}
