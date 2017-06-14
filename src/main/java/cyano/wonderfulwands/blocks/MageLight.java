@@ -84,8 +84,6 @@ public class MageLight extends Block {
         final double d0 = coord.getX() + 0.5;
         final double d = coord.getY() + 0.5;
         final double d2 = coord.getZ() + 0.5;
-        final double d3 = 0.22;
-        final double d4 = 0.27;
         
         w.spawnParticle(EnumParticleTypes.FLAME, d0, d, d2, 0.0, 0.0, 0.0, new int[0]);
         

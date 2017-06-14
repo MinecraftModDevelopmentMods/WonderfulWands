@@ -25,6 +25,7 @@ import java.util.List;
  * @author cybergnome
  *
  */
+@SuppressWarnings("deprecation")
 public class WizardsHat extends  net.minecraft.item.ItemArmor {
 
 	
@@ -139,7 +140,7 @@ public class WizardsHat extends  net.minecraft.item.ItemArmor {
    
 
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean b){
+	public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean b){
 		super.addInformation(stack,player,list,b);
 		String potionID = this.getPotionEffectID(stack);
 		if(potionID != null && Potion.getPotionFromResourceLocation(potionID) != null){

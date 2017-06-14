@@ -66,6 +66,7 @@ public class WandOfIce extends Wand {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	protected int freezeBlock(World w, BlockPos coord){
 		IBlockState bs = w.getBlockState(coord);
 		Block target = bs.getBlock();

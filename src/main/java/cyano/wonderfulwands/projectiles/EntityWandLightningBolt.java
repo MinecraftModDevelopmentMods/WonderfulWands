@@ -12,8 +12,6 @@ public class EntityWandLightningBolt  extends Entity{
 
 	int life = 0;
 	final int lifeSpan = 13;
-	private EntityLivingBase owner;
-	
 	int tileX = 0, tileY = 0, tileZ = 0;
 	
 	public double length = 1;
@@ -37,7 +35,6 @@ public class EntityWandLightningBolt  extends Entity{
 		tileZ = (int)z;
 		this.rotationPitch = pitch;
 		this.rotationYaw = yaw;
-		this.owner = owner;
 		this.length = length;
 	}
 	

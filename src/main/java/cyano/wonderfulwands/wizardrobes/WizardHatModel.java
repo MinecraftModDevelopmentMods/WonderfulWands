@@ -2,9 +2,8 @@ package cyano.wonderfulwands.wizardrobes;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class WizardHatModel extends ModelBase {
@@ -19,7 +18,6 @@ public class WizardHatModel extends ModelBase {
 		hat = new ModelRenderer(this, 0, 0);
 		hat.textureWidth = 16;
 		hat.textureHeight = 16;
-		float layerHeight = 0.1f;
 		for(int i = 0; i < 5; i++){
 			if(i == 0){
 				hat.addBox(-1.5f*(5-i),h*i+offset,-1.5f*(5-i),3*(5-i),2,3*(5-i),0.0f);

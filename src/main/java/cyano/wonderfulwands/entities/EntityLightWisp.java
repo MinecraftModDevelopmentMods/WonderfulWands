@@ -20,9 +20,6 @@ public class EntityLightWisp extends net.minecraft.entity.EntityLivingBase{
 	static final short LIFESPAN = 30*20;
 	short lifeCounter = LIFESPAN;
 	static final long UPDATE_INTERVAL = 8;
-	private final double dt = 4.0 / UPDATE_INTERVAL;
-	private BlockPos lastPos = new BlockPos(0,1,0);
-
 	private long nextUpdateTime = 0;
 	public EntityLightWisp(World w) {
 		super(w);
@@ -77,7 +74,6 @@ public class EntityLightWisp extends net.minecraft.entity.EntityLivingBase{
 			} else {
 				wanderFrom(blockCoord, light);
 			}
-			lastPos = blockCoord;
 		}
 		if(lifeCounter <= 0){
 			world.removeEntity(this);
@@ -86,7 +82,7 @@ public class EntityLightWisp extends net.minecraft.entity.EntityLivingBase{
 
 	@Override
 	public Iterable<ItemStack> getArmorInventoryList() {
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 	@Override

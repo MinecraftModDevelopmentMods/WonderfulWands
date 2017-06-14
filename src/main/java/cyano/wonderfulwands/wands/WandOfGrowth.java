@@ -56,6 +56,7 @@ public class WandOfGrowth extends Wand {
 		
 	}
 
+	@SuppressWarnings("deprecation")
 	protected boolean growBlock(EntityPlayer playerEntity, World world, BlockPos coord){
 		IBlockState targetBS = world.getBlockState(coord); 
 		Block targetBlock = targetBS.getBlock();

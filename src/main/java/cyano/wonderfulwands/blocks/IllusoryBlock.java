@@ -26,6 +26,7 @@ public class IllusoryBlock extends net.minecraft.block.Block{
 
 	public final String name;
 	
+	@SuppressWarnings("deprecation")
 	public IllusoryBlock(Block sourceBlock) {
 		this(
 				sourceBlock.getMapColor(sourceBlock.getDefaultState()),

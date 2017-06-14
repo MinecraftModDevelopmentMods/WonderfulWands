@@ -99,7 +99,8 @@ public class WonderfulWands {
 	private final EntityEquipmentSlot[] armorSlots = {EntityEquipmentSlot.HEAD, EntityEquipmentSlot.CHEST, EntityEquipmentSlot.LEGS, EntityEquipmentSlot.FEET};
 	
 	// Mark this method for receiving an FMLEvent (in this case, it's the FMLPreInitializationEvent)
-    @EventHandler public void preInit(FMLPreInitializationEvent event)
+    @SuppressWarnings("deprecation")
+	@EventHandler public void preInit(FMLPreInitializationEvent event)
     {
         // Do stuff in pre-init phase (read config, create blocks and items, register them)
     	// load config
@@ -212,11 +213,6 @@ public class WonderfulWands {
 		
 		// recipes
 
-		// add crafting recipes (3X3 shaped)
-		// Item stack (ID, Count, Meta)
-		ItemStack x;
-		ItemStack output;
-
 		// Nonmagical
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(wandGeneric), " g ", " s ", " g ", 'g', "nuggetGold", 's',"stickWood"));
 		// Magic Missile
@@ -262,8 +258,7 @@ public class WonderfulWands {
 		// wand of tunneling
 		addWandRecipe(wandOfTunneling,Items.DIAMOND_PICKAXE);
 		
-		// Wizarding Robes
-		int robesRenderIndex = proxy.getArmorRenderIndex(MODID+"_robes");
+		proxy.getArmorRenderIndex(MODID+"_robes");
 		for(int colorIndex = 0; colorIndex < 16; colorIndex++){
 			int slotIndex = 0;
 			for(int i = 0; i < 4; i++){
@@ -469,7 +464,7 @@ public class WonderfulWands {
 			return "null class";
 		}
 		StringBuilder sb = new StringBuilder();
-		Class c = o.getClass();
+		Class<?> c = o.getClass();
 		sb.append(c.getName()).append("\n");
 		do{
 			Field[] fields = c.getDeclaredFields();
