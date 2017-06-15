@@ -56,8 +56,8 @@ public class DeathSkull extends EntityWitherSkull {
 			}
 			double radius = 3;
 			if(impact.hitVec != null){
-				AxisAlignedBB aoe = new AxisAlignedBB(impact.hitVec.xCoord-radius,impact.hitVec.yCoord-radius,impact.hitVec.zCoord-radius,
-						impact.hitVec.xCoord+radius,impact.hitVec.yCoord+radius,impact.hitVec.zCoord+radius);
+				AxisAlignedBB aoe = new AxisAlignedBB(impact.hitVec.x-radius,impact.hitVec.y-radius,impact.hitVec.z-radius,
+						impact.hitVec.x+radius,impact.hitVec.y+radius,impact.hitVec.z+radius);
 				List<EntityLivingBase> collateralDamage = world.getEntitiesWithinAABB(EntityLivingBase.class, aoe);
 				PotionEffect wither = new PotionEffect(Potion.getPotionFromResourceLocation("wither"), 210, 1);
 				for(EntityLivingBase victim : collateralDamage){

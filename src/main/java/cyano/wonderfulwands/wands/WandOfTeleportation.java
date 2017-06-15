@@ -79,12 +79,12 @@ public class WandOfTeleportation extends Wand {
 			
 			for(int i = 0; i < maxRange; i++){
 				next = pos.add(vector);
-				if(next.yCoord < 0 || next.yCoord > 255) break;
+				if(next.y < 0 || next.y > 255) break;
 				BlockPos nextBlock = new BlockPos(next);
 				if(world.isAreaLoaded(coord, 1, true) ){
 					if(world.isAirBlock(nextBlock)){
 						world.spawnParticle(EnumParticleTypes.PORTAL, 
-								pos.xCoord + (world.rand.nextDouble() - 0.5), pos.yCoord + (world.rand.nextDouble() - 0.5), pos.zCoord + (world.rand.nextDouble() - 0.5), 
+								pos.x + (world.rand.nextDouble() - 0.5), pos.y + (world.rand.nextDouble() - 0.5), pos.z + (world.rand.nextDouble() - 0.5), 
 								(world.rand.nextFloat() - 0.5f) * 0.2f, (world.rand.nextFloat() - 0.5f) * 0.2f, (world.rand.nextFloat() - 0.5f) * 0.2f, 
 								new int[0]);
 						pos = next;

@@ -87,13 +87,13 @@ public abstract class Wand extends Item {
 	protected void playSound(World w, Vec3d position, double range, SoundEvent sound, float volume, float pitch){
 		if(w.isRemote)return;
 		AxisAlignedBB area = new AxisAlignedBB(
-				position.xCoord - range,position.yCoord - range,position.zCoord - range,
-				position.xCoord + range,position.yCoord + range,position.zCoord + range
+				position.x - range,position.y - range,position.z - range,
+				position.x + range,position.y + range,position.z + range
 				);
 
 		List<EntityPlayerMP> players = w.getEntitiesWithinAABB(EntityPlayerMP.class, area);
 		SPacketCustomSound soundPacket = new SPacketCustomSound(sound.getRegistryName().toString(), SoundCategory.PLAYERS,
-				position.xCoord, position.yCoord, position.zCoord, volume, pitch);
+				position.x, position.y, position.z, volume, pitch);
 		for(EntityPlayerMP player : players){
 			player.connection.sendPacket(soundPacket);
 		}
@@ -101,15 +101,15 @@ public abstract class Wand extends Item {
 	protected void playFadedSound(World w, Vec3d position, double range, SoundEvent sound, float volume, float pitch){
 		if(w.isRemote)return;
 		AxisAlignedBB area = new AxisAlignedBB(
-				position.xCoord - range,position.yCoord - range,position.zCoord - range,
-				position.xCoord + range,position.yCoord + range,position.zCoord + range
+				position.x - range,position.y - range,position.z - range,
+				position.x + range,position.y + range,position.z + range
 		);
 		List<EntityPlayerMP> players = w.getEntitiesWithinAABB(EntityPlayerMP.class, area);
 		for(EntityPlayerMP player : players){
 			float distSqr = (float)player.getPositionVector().squareDistanceTo(position);
 			float localVolume = Math.min(volume,volume/distSqr);
 			SPacketCustomSound soundPacket = new SPacketCustomSound(sound.getRegistryName().toString(), SoundCategory.PLAYERS,
-					position.xCoord, position.yCoord, position.zCoord, localVolume, pitch);
+					position.x, position.y, position.z, localVolume, pitch);
 			player.connection.sendPacket(soundPacket);
 		}
 	}

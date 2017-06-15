@@ -101,7 +101,7 @@ public class WandOfStorms extends Wand  {
 				if(target == null){
 					target = new Vec3d(trace.getBlockPos().getX(),trace.getBlockPos().getY(),trace.getBlockPos().getZ());
 				}
-				world.addWeatherEffect(new EntityLightningBolt(world,target.xCoord, target.yCoord, target.zCoord,false));
+				world.addWeatherEffect(new EntityLightningBolt(world,target.x, target.y, target.z,false));
 			}
 			
 			

@@ -48,13 +48,13 @@ public abstract class RayTrace {
 	public static boolean rayIntersectsBoundingBox(Vec3d rayOrigin, Vec3d rayDirection, AxisAlignedBB box){
 		if(box == null) return false;
 		// algorithm from http://gamedev.stackexchange.com/questions/18436/most-efficient-aabb-vs-ray-collision-algorithms
-		Vec3d inverse = new Vec3d(1.0 / rayDirection.xCoord, 1.0 / rayDirection.yCoord, 1.0 / rayDirection.zCoord);
-		double t1 = (box.minX - rayOrigin.xCoord)*inverse.xCoord;
-		double t2 = (box.maxX- rayOrigin.xCoord)*inverse.xCoord;
-		double t3 = (box.minY - rayOrigin.yCoord)*inverse.yCoord;
-		double t4 = (box.maxY - rayOrigin.yCoord)*inverse.yCoord;
-		double t5 = (box.minZ - rayOrigin.zCoord)*inverse.zCoord;
-		double t6 = (box.maxZ - rayOrigin.zCoord)*inverse.zCoord;
+		Vec3d inverse = new Vec3d(1.0 / rayDirection.x, 1.0 / rayDirection.y, 1.0 / rayDirection.z);
+		double t1 = (box.minX - rayOrigin.x)*inverse.x;
+		double t2 = (box.maxX- rayOrigin.x)*inverse.x;
+		double t3 = (box.minY - rayOrigin.y)*inverse.y;
+		double t4 = (box.maxY - rayOrigin.y)*inverse.y;
+		double t5 = (box.minZ - rayOrigin.z)*inverse.z;
+		double t6 = (box.maxZ - rayOrigin.z)*inverse.z;
 
 		double tmin = max(max(min(t1, t2), min(t3, t4)), min(t5, t6));
 		double tmax = min(min(max(t1, t2), max(t3, t4)), max(t5, t6));
@@ -75,7 +75,7 @@ public abstract class RayTrace {
 	}
 	
 	private static Vec3d mul(Vec3d a, double b){
-		return new Vec3d(a.xCoord * b, a.yCoord * b, a.zCoord * b);
+		return new Vec3d(a.x * b, a.y * b, a.z * b);
 	}
 	private static double max(double a, double b){
 		return Math.max(a, b);

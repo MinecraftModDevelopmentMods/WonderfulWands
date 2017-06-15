@@ -85,17 +85,17 @@ public class WandOfLight extends Wand {
 				BlockPos nextBlock = new BlockPos(next);
 				if(w.isAirBlock(nextBlock)){
 					// keep moving
-					w.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, pos.xCoord, pos.yCoord, pos.zCoord, 
+					w.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, pos.x, pos.y, pos.z, 
 							(w.rand.nextFloat() - 0.5f) * 0.2f, (w.rand.nextFloat() - 0.5f) * 0.2f, (w.rand.nextFloat() - 0.5f) * 0.2f,
 							new int[0]);
 					pos = next;
 					block = nextBlock;
-					if(pos.yCoord < 0 ){
-						pos = new Vec3d(pos.xCoord, 0, pos.yCoord);
+					if(pos.y < 0 ){
+						pos = new Vec3d(pos.x, 0, pos.y);
 						break;
 					}
-					if(pos.yCoord > 255){
-						pos = new Vec3d(pos.xCoord, 255, pos.yCoord);
+					if(pos.y > 255){
+						pos = new Vec3d(pos.x, 255, pos.y);
 						break;
 					}
 				} else {

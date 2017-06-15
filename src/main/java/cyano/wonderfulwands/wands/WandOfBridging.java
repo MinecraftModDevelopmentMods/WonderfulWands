@@ -76,7 +76,7 @@ public class WandOfBridging extends Wand {
 		int blocksChanged = 0;
 
 		Vec3d delta = playerEntity.getLookVec();
-		delta = (new Vec3d(delta.xCoord,0,delta.zCoord)).normalize();
+		delta = (new Vec3d(delta.x,0,delta.z)).normalize();
 		BlockPos coord = playerEntity.getPosition().down();
 		Vec3d originPrime = new Vec3d(coord.getX(), coord.getY(), coord.getZ());
 
