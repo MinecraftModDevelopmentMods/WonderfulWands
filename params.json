@@ -1,6 +1,0 @@
-{
-  "name": "Wonderfulwands",
-  "tagline": "",
-  "body": "# Cyano's Wonderful Wands\r\nThis mod adds magical wands to Minecraft\r\n\r\n## Requirements\r\nThis mod requires that you install Minecraft Forge version 1.9-10.16.0.1865 or later (ealier versions of Forge for Minecraft 1.9 may work, but no guarentees).\r\n\r\n## Installing\r\nAfter you have successfully installed Forge, simply place the file *wonderfulwands-#.#.jar* in your *mods* folder. You can get the wonderfulwands-#.#.jar file from the Releases tab of this repository page.\r\n\r\n",
-  "note": "Don't delete this file! It's used internally to help with page regeneration."
-}
