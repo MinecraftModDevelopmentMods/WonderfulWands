@@ -21,7 +21,7 @@ public class WitchsHat extends WizardsHat {
 	
 	public WitchsHat() {
 		super();
-		this.setUnlocalizedName(WonderfulWands.MODID +"_"+itemName);
+		this.setTranslationKey(WonderfulWands.MODID +"_"+itemName);
 	}
 
 	

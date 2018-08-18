@@ -29,7 +29,7 @@ public class WandOfBridging extends Wand {
 	
 	public WandOfBridging(Block bridgeBlock) {
 		super(defaultCharges);
-		this.setUnlocalizedName(WonderfulWands.MODID +"_"+ itemName);
+		this.setTranslationKey(WonderfulWands.MODID +"_"+ itemName);
 		this.bridgeBlock = bridgeBlock;
 	}
 

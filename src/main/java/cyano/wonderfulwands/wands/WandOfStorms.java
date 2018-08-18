@@ -26,7 +26,7 @@ public class WandOfStorms extends Wand  {
 	public static final int AOEdiameter = 64;
 	public WandOfStorms() {
 		super(defaultCharges);
-		this.setUnlocalizedName(WonderfulWands.MODID +"_"+ itemName);
+		this.setTranslationKey(WonderfulWands.MODID +"_"+ itemName);
 	}
 
 

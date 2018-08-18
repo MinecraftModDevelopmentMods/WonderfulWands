@@ -1,9 +1,9 @@
 package cyano.wonderfulwands.graphics;
 
 import cyano.wonderfulwands.WonderfulWands;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -31,7 +31,7 @@ public class LightWispRenderer extends Render{
      //   final float scale = this.scale;
      //   GlStateManager.scale(scale / 1.0f, scale / 1.0f, scale / 1.0f);
         final Tessellator instance = Tessellator.getInstance();
-        final VertexBuffer worldRenderer = instance.getBuffer();
+        final BufferBuilder worldRenderer = instance.getBuffer();
         final float minU = 0;
         final float maxU = 1;
         final float minV = 0;

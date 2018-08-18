@@ -26,7 +26,7 @@ public class WandOfLight extends Wand {
 	
 	public WandOfLight() {
 		super(defaultCharges);
-		this.setUnlocalizedName(WonderfulWands.MODID +"_"+ itemName);
+		this.setTranslationKey(WonderfulWands.MODID +"_"+ itemName);
 	}
 
 

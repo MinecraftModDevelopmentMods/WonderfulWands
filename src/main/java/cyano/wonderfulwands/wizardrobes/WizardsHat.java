@@ -38,7 +38,7 @@ public class WizardsHat extends  net.minecraft.item.ItemArmor {
 	
 	public WizardsHat( ) {
 		super( WonderfulWands.NONARMOR, 0, EntityEquipmentSlot.HEAD);
-		this.setUnlocalizedName(WonderfulWands.MODID +"_"+itemName);
+		this.setTranslationKey(WonderfulWands.MODID +"_"+itemName);
 		this.setCreativeTab(WonderfulWands.robesTab);
 		// set values
 		this.setMaxDamage(1);

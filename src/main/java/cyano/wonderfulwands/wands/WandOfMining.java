@@ -19,7 +19,7 @@ public class WandOfMining extends Wand {
 	
 	public WandOfMining() {
 		super(defaultCharges);
-		this.setUnlocalizedName(WonderfulWands.MODID +"_"+ itemName);
+		this.setTranslationKey(WonderfulWands.MODID +"_"+ itemName);
         this.setMaxDamage(defaultCharges + 1);
 	}
 

@@ -25,7 +25,7 @@ public class WandOfWebbing extends Wand {
 
 	public WandOfWebbing() {
 		super(defaultCharges);
-		this.setUnlocalizedName(WonderfulWands.MODID +"_"+ itemName);
+		this.setTranslationKey(WonderfulWands.MODID +"_"+ itemName);
 	}
 
 

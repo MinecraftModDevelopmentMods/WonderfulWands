@@ -42,11 +42,11 @@ import java.lang.reflect.Field;
 import java.util.Map;
 
 @Mod(modid = WonderfulWands.MODID, name=WonderfulWands.NAME, version = WonderfulWands.VERSION,
-		acceptedMinecraftVersions = "[1.11.2,)")
+		acceptedMinecraftVersions = "[1.12,)")
 public class WonderfulWands {
     public static final String MODID = "wonderfulwands";
     public static final String NAME ="Cyano's Wonderful Wands";
-    public static final String VERSION = "2.3.0";
+    public static final String VERSION = "2.4.0";
 	
     @SidedProxy(clientSide="cyano.wonderfulwands.ClientProxy", serverSide="cyano.wonderfulwands.ServerProxy")
     public static Proxy proxy;
@@ -117,7 +117,7 @@ public class WonderfulWands {
     	NONARMOR = net.minecraftforge.common.util.EnumHelper.addArmorMaterial("NONARMOR","empty_armor",10,new int[]{0, 0, 0, 0},0, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0);
     	WIZARDROBES = net.minecraftforge.common.util.EnumHelper.addArmorMaterial("WIZARDCLOTH","wizard_robes", 15,new int[]{1, 1, 1, 1},40, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0);
     	
-		wandGeneric = new Item().setUnlocalizedName(MODID+"_wand_ordinary").setCreativeTab(wandsTab);
+		wandGeneric = new Item().setTranslationKey(MODID+"_wand_ordinary").setCreativeTab(wandsTab);
 		wandOfMagicMissile = new WandOfMagicMissile();
 		wandOfFire = new WandOfFire();
 		wandOfDeath = new WandOfDeath();
@@ -150,7 +150,7 @@ public class WonderfulWands {
 		registerBlock(illusion,illusion.name);
 		illusion = new IllusoryBlock(Blocks.BOOKSHELF);
 		registerBlock(illusion,illusion.name);
-		illusion = new IllusoryBlock(Blocks.STONE); illusion.setUnlocalizedName("stone.stone");
+		illusion = new IllusoryBlock(Blocks.STONE); illusion.setTranslationKey("stone.stone");
 		registerBlock(illusion,illusion.name);
 		illusion = new IllusoryBlock(Blocks.COBBLESTONE.getMapColor(Blocks.COBBLESTONE.getDefaultState()),"illusion_cobblestone", Blocks.COBBLESTONE, "stonebrick");
 		registerBlock(illusion,illusion.name);
@@ -178,11 +178,11 @@ public class WonderfulWands {
 		registerBlock(illusion,illusion.name);
 
 		feyRail = new FeyRail();
-		feyRail.setUnlocalizedName("feyrail");
+		feyRail.setTranslationKey("feyrail");
 		feyRail.setCreativeTab(wandsTab);
 		registerBlock(feyRail,"feyrail");
 		feyRailPowered = new PoweredFeyRail();
-		feyRailPowered.setUnlocalizedName("powered_feyrail");
+		feyRailPowered.setTranslationKey("powered_feyrail");
 		feyRailPowered.setCreativeTab(wandsTab);
 		registerBlock(feyRailPowered,"powered_feyrail");
 

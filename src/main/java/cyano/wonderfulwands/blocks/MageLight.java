@@ -30,7 +30,7 @@ public class MageLight extends Block {
         this.setHardness(0.0F);
         this.setLightLevel(1F);
         this.setSoundType(SoundType.GLASS);
-        this.setUnlocalizedName(WonderfulWands.MODID+"_"+name);
+        this.setTranslationKey(WonderfulWands.MODID+"_"+name);
         
         float f = 0.25F;
         float min = 0.5F - f;

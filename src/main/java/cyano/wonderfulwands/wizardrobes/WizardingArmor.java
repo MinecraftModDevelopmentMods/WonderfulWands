@@ -37,7 +37,7 @@ public class WizardingArmor extends ItemArmor {
 	//	// add icons
 	//	func_111206_d("wizardrobes:robes"+armorSlot);
 		String name = itemName+"_"+color+"_"+slotName.get(armorSlot);
-		this.setUnlocalizedName(WonderfulWands.MODID +"_"+name);
+		this.setTranslationKey(WonderfulWands.MODID +"_"+name);
 		this.setCreativeTab(WonderfulWands.robesTab);
 		this.color = color;
 	}
@@ -48,8 +48,8 @@ public class WizardingArmor extends ItemArmor {
     @Override public boolean getIsRepairable(ItemStack srcItemStack, ItemStack rawMaterial)
     {
     	// repair with string or wool
-        return rawMaterial.getUnlocalizedName().equals(Items.STRING.getUnlocalizedName()) 
-        		|| rawMaterial.getUnlocalizedName().equals(Blocks.WOOL.getUnlocalizedName());
+        return rawMaterial.getTranslationKey().equals(Items.STRING.getTranslationKey()) 
+        		|| rawMaterial.getTranslationKey().equals(Blocks.WOOL.getTranslationKey());
     }
 	
     @SideOnly(Side.CLIENT)

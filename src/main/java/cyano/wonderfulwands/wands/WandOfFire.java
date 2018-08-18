@@ -23,7 +23,7 @@ public class WandOfFire extends Wand  {
 	
 	public WandOfFire() {
 		super(defaultCharges);
-		this.setUnlocalizedName(WonderfulWands.MODID +"_"+ itemName);
+		this.setTranslationKey(WonderfulWands.MODID +"_"+ itemName);
 	}
 
 	@Override

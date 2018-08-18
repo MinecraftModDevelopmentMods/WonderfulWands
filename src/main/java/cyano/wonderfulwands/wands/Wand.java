@@ -46,7 +46,7 @@ public abstract class Wand extends Item {
     	// repair with gold ingots
     	if(allowedItems == null)allowedItems = OreDictionary.getOres("ingotGold"); 
     	for(int i = 0; i < allowedItems.size(); i++){
-    		if(allowedItems.get(i).getUnlocalizedName().equals(rawMaterial.getUnlocalizedName())) return true;
+    		if(allowedItems.get(i).getTranslationKey().equals(rawMaterial.getTranslationKey())) return true;
     	}
     	return false;
     }

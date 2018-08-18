@@ -27,7 +27,7 @@ public class WandOfGrowth extends Wand {
 	
 	public WandOfGrowth() {
 		super(defaultCharges);
-		this.setUnlocalizedName(WonderfulWands.MODID +"_"+ itemName);
+		this.setTranslationKey(WonderfulWands.MODID +"_"+ itemName);
 	}
 	
 	@Override

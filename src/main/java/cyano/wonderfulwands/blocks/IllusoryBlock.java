@@ -30,14 +30,14 @@ public class IllusoryBlock extends net.minecraft.block.Block{
 	public IllusoryBlock(Block sourceBlock) {
 		this(
 				sourceBlock.getMapColor(sourceBlock.getDefaultState()),
-				"illusion_" + (sourceBlock.getUnlocalizedName().replace("tile.", "")),
-				sourceBlock, sourceBlock.getUnlocalizedName().replace("tile.", "")
+				"illusion_" + (sourceBlock.getTranslationKey().replace("tile.", "")),
+				sourceBlock, sourceBlock.getTranslationKey().replace("tile.", "")
 		);
 	}
 	
 
 	public IllusoryBlock(MapColor color, String name, Block sourceBlock) {
-		this(color,name,sourceBlock,sourceBlock.getUnlocalizedName().replace("tile.", ""));
+		this(color,name,sourceBlock,sourceBlock.getTranslationKey().replace("tile.", ""));
 	}
 	
 
@@ -51,7 +51,7 @@ public class IllusoryBlock extends net.minecraft.block.Block{
 		this.setHardness(0.0F);
 		this.setSoundType(SoundType.CLOTH);
 		this.name = name;
-		this.setUnlocalizedName(sourceBlockUnlocalizedName);
+		this.setTranslationKey(sourceBlockUnlocalizedName);
 		blockLookup.put(sourceBlock, this);
 	}
 	

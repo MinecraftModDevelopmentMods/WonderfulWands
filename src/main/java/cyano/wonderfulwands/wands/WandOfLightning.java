@@ -33,7 +33,7 @@ public class WandOfLightning extends Wand {
 	 */
 	public WandOfLightning(){
 		super(defaultCharges);
-		this.setUnlocalizedName(WonderfulWands.MODID +"_"+ itemName);
+		this.setTranslationKey(WonderfulWands.MODID +"_"+ itemName);
 	}
 
 	@Override public int getMaxItemUseDuration(ItemStack par1ItemStack){

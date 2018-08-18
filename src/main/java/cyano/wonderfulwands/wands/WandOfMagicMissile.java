@@ -25,7 +25,7 @@ public class WandOfMagicMissile extends Wand {
 	 */
 	public WandOfMagicMissile(){
 		super(defaultCharges);
-		this.setUnlocalizedName(WonderfulWands.MODID +"_"+ itemName);
+		this.setTranslationKey(WonderfulWands.MODID +"_"+ itemName);
 	}
 	
 	public int getMaxItemUseDuration(ItemStack par1ItemStack){
