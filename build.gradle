@@ -16,7 +16,7 @@ buildscript {
     }
     dependencies {
         classpath "net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT"
-        classpath 'gradle.plugin.com.matthewprenger:CurseGradle:1.0.10'
+        classpath 'gradle.plugin.com.matthewprenger:CurseGradle:1.0.11'
     }
 }
 
@@ -26,7 +26,6 @@ apply plugin: 'com.matthewprenger.cursegradle'
 def mod_file = getModFile()
 version = getVersion("VERSION", mod_file)
 group= "cyano.wonderfulwands" 
-archivesBaseName = "CyanosWonderfulWands_1.11.2"
 sourceCompatibility = targetCompatibility = "1.8"
 
 minecraft {
