@@ -1,1 +1,10 @@
 *~
+.gradle
+build
+run
+.settings
+*.iml
+*.ipr
+*.iws
+.project
+.classpath

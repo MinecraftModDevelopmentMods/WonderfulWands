@@ -22,8 +22,9 @@ group= "cyano.wonderfulwands"
 archivesBaseName = "CyanosWonderfulWands"
 
 minecraft {
-    version = "1.7.10-10.13.2.1230"
-    runDir = "eclipse"
+    version = "1.7.10-10.13.4.1558-1.7.10"
+    runDir = "run"
+    mappings = "stable_12"
 }
 
 dependencies {
