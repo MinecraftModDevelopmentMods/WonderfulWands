@@ -1,24 +1,26 @@
 package com.mcmoddev.wonderfulwands;
 
 
-import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 
 public class Proxy {
 
-    public void preInit(FMLPreInitializationEvent e) {
-    	// do nothing
-    }
+	public void preInit(FMLPreInitializationEvent e) {
+		// do nothing
+	}
 
-    public void init(FMLInitializationEvent e) {
-    	// do nothing
-    }
+	public void init(FMLInitializationEvent e) {
+		// do nothing
+	}
 
-    public void postInit(FMLPostInitializationEvent e) {
-    	// do nothing
-    }
+	public void postInit(FMLPostInitializationEvent e) {
+		// do nothing
+	}
 
-    public int getArmorRenderIndex(String armorSet){
+	public int getArmorRenderIndex(String armorSet) {
 		return 0; // Server don't care!
 	}
 }

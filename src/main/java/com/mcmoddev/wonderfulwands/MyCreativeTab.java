@@ -8,16 +8,18 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MyCreativeTab extends CreativeTabs {
 	Item icon;
+
 	/**
 	 * Constructor
+	 *
 	 * @param unlocalizedName Unlocalized name for the tab
 	 */
-	public MyCreativeTab( String unlocalizedName) {
+	public MyCreativeTab(String unlocalizedName) {
 		super(unlocalizedName);
 		this.icon = net.minecraft.init.Items.BED;
 	}
 
-	public void setIcon(Item i){
+	public void setIcon(Item i) {
 		this.icon = i;
 	}
 
