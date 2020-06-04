@@ -1,0 +1,51 @@
+{
+  "homepage": "https://www.curseforge.com/minecraft/mc-mods/drcyanos-wonderful-wands-wizarding-robes",
+  "promos": {
+    "1.12.2-latest": "3.0.0",
+    "1.11.2-latest": "2.3.0",
+    "1.10.2-latest": "2.2.0",
+    "1.9.4-latest": "2.1.0",
+    "1.9-latest": "2.0.0",
+    "1.8.9-latest": "1.8.0",
+    "1.8-latest": "1.7.2",
+    "1.7.10-latest": "1.4.2",
+    "1.12.2-recommended": "3.0.0",
+    "1.11.2-recommended": "2.3.0",
+    "1.10.2-recommended": "2.2.0",
+    "1.9.4-recommended": "2.1.0",
+    "1.9-recommended": "2.0.0",
+    "1.8.9-recommended": "1.8.0",
+    "1.8-recommended": "1.7.2",
+    "1.7.10-recommended": "1.4.2"
+  },
+  "1.12.2": {
+    "3.0.0": "Rewrite the mod from the ground up."
+  },
+  "1.11.2": {
+    "2.3.0": "Update to 1.11.2 (Thanks to Caz)"
+  },
+  "1.10.2": {
+    "2.2.0": "Port to 1.10.2"
+  },
+  "1.9.4": {
+    "2.1.0": "update"
+  },
+  "1.9": {
+    "2.0.0": "Update to 1.9 and new wands"
+  },
+  "1.8.9": {
+    "1.8.0": "Update to Minecraft 1.8.9 and added the Wand of Illusions"
+  },
+  "1.8": {
+    "1.7.2": "Final release for Minecraft 1.8.0"
+  },
+  "1.7.10": {
+    "1.4.2": "Final Release for Minecraft 1.7.10"
+  },
+  "1.7.2": {
+    "0.0.0": "No Release"
+  },
+  "1.6.4": {
+    "0.0.0": "No Release"
+  }
+}

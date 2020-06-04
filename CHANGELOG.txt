@@ -1,0 +1,2 @@
+3.0.0
+- Rewrite the mod from the ground up for 1.12.2
