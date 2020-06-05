@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 /**
  * a non-pickupable arrow
  */
-public class EntityMagicMissile extends net.minecraft.entity.projectile.EntityArrow {
+public class EntityMagicMissile extends EntityArrow {
 
 	int life = 0;
 	final int lifeSpan = 100;
@@ -31,13 +31,12 @@ public class EntityMagicMissile extends net.minecraft.entity.projectile.EntityAr
 	public EntityMagicMissile(World w, EntityLivingBase shooter) {
 		super(w, shooter);
 		init();
-		this.setAim(shooter, shooter.rotationPitch, shooter.rotationYaw, 0.0F, 3.0F, 1.0F); // set velocity from shooter
+		this.shoot(shooter, shooter.rotationPitch, shooter.rotationYaw, 0.0F, 3.0F, 1.0F);
+		// set velocity from shooter
 	}
-
 
 	@Override
 	protected ItemStack getArrowStack() {
 		return null;
 	}
-
 }

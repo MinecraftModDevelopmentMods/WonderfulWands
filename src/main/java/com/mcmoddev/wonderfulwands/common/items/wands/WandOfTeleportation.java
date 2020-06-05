@@ -1,6 +1,5 @@
 package com.mcmoddev.wonderfulwands.common.items.wands;
 
-import com.mcmoddev.wonderfulwands.WonderfulWands;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -16,17 +15,13 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class WandOfTeleportation extends Wand {
-	public static final String itemName = "wand_teleportation";
-
 
 	public static int defaultCharges = 64;
 
 	public WandOfTeleportation() {
 		super(defaultCharges);
-		this.setTranslationKey(WonderfulWands.MODID + "_" + itemName);
 		this.setMaxDamage(defaultCharges + 1);
 	}
-
 
 	@Override
 	public int getBaseRepairCost() {
@@ -55,7 +50,8 @@ public class WandOfTeleportation extends Wand {
 	 * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
 	 */
 	@Override
-	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord, EnumFacing blockFace, float par8, float par9, float par10) {
+	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord,
+							 EnumFacing blockFace, float par8, float par9, float par10) {
 		return false;
 	}
 
@@ -88,8 +84,10 @@ public class WandOfTeleportation extends Wand {
 			if (world.isAreaLoaded(coord, 1, true)) {
 				if (world.isAirBlock(nextBlock)) {
 					world.spawnParticle(EnumParticleTypes.PORTAL,
-						pos.x + (world.rand.nextDouble() - 0.5), pos.y + (world.rand.nextDouble() - 0.5), pos.z + (world.rand.nextDouble() - 0.5),
-						(world.rand.nextFloat() - 0.5f) * 0.2f, (world.rand.nextFloat() - 0.5f) * 0.2f, (world.rand.nextFloat() - 0.5f) * 0.2f,
+						pos.x + (world.rand.nextDouble() - 0.5), pos.y + (world.rand.nextDouble() - 0.5),
+						pos.z + (world.rand.nextDouble() - 0.5),
+						(world.rand.nextFloat() - 0.5f) * 0.2f, (world.rand.nextFloat() - 0.5f) * 0.2f,
+						(world.rand.nextFloat() - 0.5f) * 0.2f,
 						new int[0]);
 					pos = next;
 					coord = nextBlock;
@@ -108,8 +106,6 @@ public class WandOfTeleportation extends Wand {
 		playerEntity.setLocationAndAngles(coord.getX() + 0.5, coord.getY() + 0.25, coord.getZ() + 0.5, playerEntity.rotationYaw, playerEntity.rotationPitch);
 		if (world.isRemote) playerEntity.setVelocity(0, 0, 0);
 		playerEntity.fallDistance = 0;
-
 		playSound(playerEntity.getEntityWorld(), next, 12, SoundEvents.ENTITY_ENDERMEN_TELEPORT);
 	}
-
 }

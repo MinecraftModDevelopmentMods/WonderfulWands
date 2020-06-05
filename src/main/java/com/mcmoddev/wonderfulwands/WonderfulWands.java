@@ -1,163 +1,126 @@
 package com.mcmoddev.wonderfulwands;
 
-
-import com.mcmoddev.wonderfulwands.common.blocks.FeyRail;
-import com.mcmoddev.wonderfulwands.common.blocks.IllusoryBlock;
-import com.mcmoddev.wonderfulwands.common.blocks.MageLight;
-import com.mcmoddev.wonderfulwands.common.blocks.PoweredFeyRail;
-import com.mcmoddev.wonderfulwands.common.entities.EntityLightWisp;
-import com.mcmoddev.wonderfulwands.common.items.wands.Wand;
-import com.mcmoddev.wonderfulwands.common.items.wands.WandOfBridging;
-import com.mcmoddev.wonderfulwands.common.items.wands.WandOfClimbing;
-import com.mcmoddev.wonderfulwands.common.items.wands.WandOfDeath;
-import com.mcmoddev.wonderfulwands.common.items.wands.WandOfFire;
-import com.mcmoddev.wonderfulwands.common.items.wands.WandOfGreaterLight;
-import com.mcmoddev.wonderfulwands.common.items.wands.WandOfGrowth;
-import com.mcmoddev.wonderfulwands.common.items.wands.WandOfHarvesting;
-import com.mcmoddev.wonderfulwands.common.items.wands.WandOfHealing;
-import com.mcmoddev.wonderfulwands.common.items.wands.WandOfIce;
-import com.mcmoddev.wonderfulwands.common.items.wands.WandOfIllusions;
-import com.mcmoddev.wonderfulwands.common.items.wands.WandOfLevitation;
-import com.mcmoddev.wonderfulwands.common.items.wands.WandOfLight;
-import com.mcmoddev.wonderfulwands.common.items.wands.WandOfLightning;
-import com.mcmoddev.wonderfulwands.common.items.wands.WandOfMagicMissile;
-import com.mcmoddev.wonderfulwands.common.items.wands.WandOfMining;
-import com.mcmoddev.wonderfulwands.common.items.wands.WandOfRails;
-import com.mcmoddev.wonderfulwands.common.items.wands.WandOfStorms;
-import com.mcmoddev.wonderfulwands.common.items.wands.WandOfTeleportation;
-import com.mcmoddev.wonderfulwands.common.items.wands.WandOfTunneling;
-import com.mcmoddev.wonderfulwands.common.items.wands.WandOfWebbing;
-import com.mcmoddev.wonderfulwands.common.items.wizardrobes.TopHat;
-import com.mcmoddev.wonderfulwands.common.items.wizardrobes.WitchsHat;
-import com.mcmoddev.wonderfulwands.common.items.wizardrobes.WizardingArmor;
-import com.mcmoddev.wonderfulwands.common.items.wizardrobes.WizardsHat;
-import com.mcmoddev.wonderfulwands.common.projectiles.EntityMagicMissile;
-import com.mcmoddev.wonderfulwands.common.projectiles.EntityWandLightningBolt;
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import com.mcmoddev.wonderfulwands.init.WonderfulBlocks;
+import com.mcmoddev.wonderfulwands.init.WonderfulItems;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.config.Configuration;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLFingerprintViolationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
-import java.util.Map;
-
-@Mod(modid = WonderfulWands.MODID, name = WonderfulWands.NAME, version = WonderfulWands.VERSION,
-	acceptedMinecraftVersions = "[1.12,)")
+@Mod(
+	modid = WonderfulWands.MODID,
+	name = WonderfulWands.NAME,
+	version = WonderfulWands.VERSION,
+	acceptedMinecraftVersions = WonderfulWands.MC_VERSION,
+	certificateFingerprint = WonderfulWands.FINGERPRINT,
+	updateJSON = WonderfulWands.UPDATE_JSON
+)
 public class WonderfulWands {
+
+	//TODO Client models, blockstates, lang files and textures are not working yet.
+	//TODO Recipes and config stuff need to be added.
+	//TODO Robes, and ilusion blocks need adding back in.
+	//TODO EVERYTHING needs cleaning up... Code is such a mess...
+	//TODO Find and catch the bugs. First one linked below. Line 62. (Hold right click the wand in game for the crash)
+	/**{@link com.mcmoddev.wonderfulwands.common.entities.EntityLightWisp#writeToNBT(NBTTagCompound)}*/
+
 	public static final String MODID = "wonderfulwands";
 	public static final String NAME = "Wonderful Wands";
 	public static final String VERSION = "3.0.0";
+	public static final String MC_VERSION = "[1.12,)";
+	public static final String FINGERPRINT = "@FINGERPRINT@";
+	public static final String UPDATE_JSON =
+		"https://raw.githubusercontent.com/MinecraftModDevelopmentMods/WonderfulWands/master/update.json";
+	public static final Logger LOGGER = LogManager.getLogger(NAME);
 
-	@SidedProxy(clientSide = "com.mcmoddev.wonderfulwands.ClientProxy", serverSide = "com.mcmoddev.wonderfulwands.ServerProxy")
-	public static Proxy proxy;
+	@Mod.EventHandler
+	public void onFingerprintViolation(final FMLFingerprintViolationEvent event) {
+		FMLLog.bigWarning("Invalid fingerprint detected! The file " + event.getSource().getName()
+			+ " may have been tampered with. This jar will NOT be supported by MMD!");
+	}
 
-	public static Item wandGeneric = null;
-	public static Wand wandOfMagicMissile = null;
-	public static Wand wandOfDeath = null;
-	public static Wand wandOfFire = null;
-	public static Wand wandOfGrowth = null;
-	public static Wand wandOfHarvesting = null;
-	public static Wand wandOfHealing = null;
-	public static Wand wandOfIce = null;
-	public static Wand wandOfMining = null;
-	public static Wand wandOfTeleportation = null;
-	public static Wand wandOfLight = null;
-	public static Wand wandOfGreaterLight = null;
-	public static Wand wandOfStorms = null;
-	public static Wand wandOfLightning = null;
-	public static Wand wandOfBridging = null;
-	public static Wand wandOfClimbing = null;
-	public static Wand wandOfIllusions = null;
-	public static Wand wandOfRails = null;
-	public static Wand wandOfWebbing = null;
-	public static Wand wandOfLevitation = null;
-	public static Wand wandOfTunneling = null;
+	public static final CreativeTabs TAB_WANDS = new CreativeTabs("tab." + MODID + ".wands") {
+		@Override
+		public ItemStack createIcon() {
+			return new ItemStack(WonderfulItems.WAND_GENERIC);
+		}
+	};
 
-	public static Block mageLight = null;
-	public static Block feyRail = null;
-	public static Block feyRailPowered = null;
+	public static final CreativeTabs TAB_ROBES = new CreativeTabs("tab." + MODID + ".armor") {
+		@Override
+		public ItemStack createIcon() {
+			return new ItemStack(WonderfulItems.WIZARDS_HAT);
+		}
+	};
+
+	//TODO If we remove the blocks as items we can place from creative, remove this.
+	public static final CreativeTabs TAB_BLOCKS = new CreativeTabs("tab." + MODID + ".blocks") {
+		@Override
+		public ItemStack createIcon() {
+			return new ItemStack(WonderfulBlocks.MAGE_LIGHT);
+		}
+	};
+
+	public static ItemArmor.ArmorMaterial NONARMOR = EnumHelper.addArmorMaterial("NONARMOR",
+		"empty_armor", 10, new int[]{0, 0, 0, 0},
+		0, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0);
+	public static ItemArmor.ArmorMaterial WIZARDROBES = EnumHelper.addArmorMaterial("WIZARDCLOTH",
+		"wizard_robes", 15, new int[]{1, 1, 1, 1},
+		40, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0);
+
+	@Mod.EventHandler
+	public void preInit(FMLPreInitializationEvent event) {
+		LOGGER.info("Is this magical robe for me??");
+	}
+
+	@Mod.EventHandler
+	public void init(FMLInitializationEvent event) {
+		LOGGER.info("Ooo a wand too?!");
+	}
+
+	@Mod.EventHandler
+	public void postInit(FMLPostInitializationEvent event) {
+		LOGGER.info("I'm a real Wizard!");
+	}
+}
+
+
+	/**
+	 * Below this line is all the old code from 1.11.2. It is to be cleaned up/removed, do not enable it.
+
+
+
+
+
 
 	public static boolean altRecipes = false;
 
 	public static WizardingArmor[][] robes = new WizardingArmor[16][4]; // [color][slot]
-
-	public static WizardsHat wizardHat = null;
-	public static WitchsHat witchHat = null;
-	public static TopHat topHat = null;
 
 	private static final String[] colorSuffixes = {"black", "red", "green", "brown", "blue", "purple", "cyan",
 		"silver", "gray", "pink", "lime", "yellow", "light_blue", "magenta", "orange", "white"};
 	private static final String[] oreDictionaryColors = {"dyeBlack", "dyeRed", "dyeGreen", "dyeBrown", "dyeBlue", "dyePurple", "dyeCyan",
 		"dyeLightGray", "dyeGray", "dyePink", "dyeLime", "dyeYellow", "dyeLightBlue", "dyeMagenta", "dyeOrange", "dyeWhite"};
 
-
-	public static ItemArmor.ArmorMaterial NONARMOR = null;
-	public static ItemArmor.ArmorMaterial WIZARDROBES = null;
-
-	public static MyCreativeTab robesTab;
-	public static MyCreativeTab wandsTab;
-
 	private final EntityEquipmentSlot[] armorSlots = {EntityEquipmentSlot.HEAD, EntityEquipmentSlot.CHEST, EntityEquipmentSlot.LEGS, EntityEquipmentSlot.FEET};
 
-	// Mark this method for receiving an FMLEvent (in this case, it's the FMLPreInitializationEvent)
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		// Do stuff in pre-init phase (read config, create blocks and items, register them)
-		// load config
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		config.load();
 
-
-		robesTab = new MyCreativeTab(MODID + ".armor");
-		wandsTab = new MyCreativeTab(MODID + ".wands");
-
 		altRecipes = config.getBoolean("alternative_recipes", "options", false,
 			"If true, then robes and wands will use different recipes than normal");
-
-		NONARMOR = net.minecraftforge.common.util.EnumHelper.addArmorMaterial("NONARMOR", "empty_armor", 10, new int[]{0, 0, 0, 0}, 0, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0);
-		WIZARDROBES = net.minecraftforge.common.util.EnumHelper.addArmorMaterial("WIZARDCLOTH", "wizard_robes", 15, new int[]{1, 1, 1, 1}, 40, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0);
-
-		wandGeneric = new Item().setTranslationKey(MODID + "_wand_ordinary").setCreativeTab(wandsTab);
-		wandOfMagicMissile = new WandOfMagicMissile();
-		wandOfFire = new WandOfFire();
-		wandOfDeath = new WandOfDeath();
-		wandOfGrowth = new WandOfGrowth();
-		wandOfHarvesting = new WandOfHarvesting();
-		wandOfHealing = new WandOfHealing();
-		wandOfIce = new WandOfIce();
-		wandOfMining = new WandOfMining();
-		wandOfTeleportation = new WandOfTeleportation();
-		wandOfLight = new WandOfLight();
-		wandOfGreaterLight = new WandOfGreaterLight();
-		wandOfStorms = new WandOfStorms();
-		wandOfLightning = new WandOfLightning();
-		wandOfBridging = new WandOfBridging(Blocks.COBBLESTONE);
-		wandOfClimbing = new WandOfClimbing();
-		wandOfIllusions = new WandOfIllusions();
-		wandOfRails = new WandOfRails();
-		wandOfWebbing = new WandOfWebbing();
-		wandOfLevitation = new WandOfLevitation();
-		wandOfTunneling = new WandOfTunneling();
 
 		mageLight = new MageLight();
 		registerBlock(mageLight, MageLight.name);
@@ -197,39 +160,6 @@ public class WonderfulWands {
 		registerBlock(illusion, illusion.name);
 		illusion = new IllusoryBlock(Blocks.SAND);
 		registerBlock(illusion, illusion.name);
-
-		feyRail = new FeyRail();
-		feyRail.setTranslationKey("feyrail");
-		feyRail.setCreativeTab(wandsTab);
-		registerBlock(feyRail, "feyrail");
-		feyRailPowered = new PoweredFeyRail();
-		feyRailPowered.setTranslationKey("powered_feyrail");
-		feyRailPowered.setCreativeTab(wandsTab);
-		registerBlock(feyRailPowered, "powered_feyrail");
-
-
-		// Register the wand items
-		registerItem(wandGeneric, "wand_ordinary");
-		registerItem(wandOfMagicMissile, WandOfMagicMissile.itemName);
-		registerItem(wandOfFire, WandOfFire.itemName);
-		registerItem(wandOfDeath, WandOfDeath.itemName);
-		registerItem(wandOfGrowth, WandOfGrowth.itemName);
-		registerItem(wandOfHarvesting, WandOfHarvesting.itemName);
-		registerItem(wandOfHealing, WandOfHealing.itemName);
-		registerItem(wandOfIce, WandOfIce.itemName);
-		registerItem(wandOfMining, WandOfMining.itemName);
-		registerItem(wandOfTeleportation, WandOfTeleportation.itemName);
-		registerItem(wandOfLight, WandOfLight.itemName);
-		registerItem(wandOfGreaterLight, WandOfGreaterLight.itemName);
-		registerItem(wandOfStorms, WandOfStorms.itemName);
-		registerItem(wandOfLightning, WandOfLightning.itemName);
-		registerItem(wandOfBridging, WandOfBridging.itemName);
-		registerItem(wandOfClimbing, WandOfClimbing.itemName);
-		registerItem(wandOfIllusions, WandOfIllusions.itemName);
-		registerItem(wandOfRails, WandOfRails.itemName);
-		registerItem(wandOfWebbing, WandOfWebbing.itemName);
-		registerItem(wandOfLevitation, WandOfLevitation.itemName);
-		registerItem(wandOfTunneling, WandOfTunneling.itemName);
 
 		// recipes
 
@@ -278,7 +208,6 @@ public class WonderfulWands {
 		// wand of tunneling
 		addWandRecipe(wandOfTunneling, Items.DIAMOND_PICKAXE);
 
-		proxy.getArmorRenderIndex(MODID + "_robes");
 		for (int colorIndex = 0; colorIndex < 16; colorIndex++) {
 			int slotIndex = 0;
 			for (int i = 0; i < 4; i++) {
@@ -307,15 +236,6 @@ public class WonderfulWands {
 			}
 		}
 
-
-		wizardHat = new WizardsHat();
-		registerItem(wizardHat, wizardHat.itemName);
-		witchHat = new WitchsHat();
-		registerItem(witchHat, witchHat.itemName);
-		topHat = new TopHat();
-		registerItem(topHat, topHat.itemName);
-
-
 		if (config.getBoolean("allow_wizard_hat", "options", true,
 			"If true, then the Wizard's Hat and Witch's Hat items will be craftable (if \n" +
 				"false, the hats will not be craftable). These hats are very powerful and you \n" +
@@ -334,7 +254,6 @@ public class WonderfulWands {
 
 		//	OreDictionary.initVanillaEntries()
 		config.save();
-		proxy.preInit(event);
 	}
 
 	private static void addWandRecipe(Wand output, Item specialItem) {
@@ -377,63 +296,13 @@ public class WonderfulWands {
 		}
 	}
 
-	@EventHandler
-	public void init(FMLInitializationEvent event) {
-		// register entities
-		registerItemRenders();
-
-		EntityRegistry.registerModEntity(new ResourceLocation("magic_missle"), EntityMagicMissile.class, "magic_missile", 0/*id*/, this, 128/*trackingRange*/, 1/*updateFrequency*/, true/*sendsVelocityUpdates*/);
-
-		EntityRegistry.registerModEntity(new ResourceLocation("lighting_bolt"), EntityWandLightningBolt.class, "bolt_lightning", 1/*id*/, this, 128/*trackingRange*/, 1/*updateFrequency*/, false/*sendsVelocityUpdates*/);
-
-		EntityRegistry.registerModEntity(new ResourceLocation("light_wisp"), EntityLightWisp.class, "WispLight", 2/*id*/, this, 128/*trackingRange*/, 1/*updateFrequency*/, true/*sendsVelocityUpdates*/);
-
-		robesTab.setIcon(witchHat);
-		wandsTab.setIcon(wandGeneric);
-
-		proxy.init(event);
-
-
-	}
-
 	private void registerItemRenders() {
-		// client-side only
-		if (proxy instanceof ServerProxy) return;
-		registerItemRender(wandGeneric, "wand_ordinary");
-		registerItemRender(wandOfMagicMissile, WandOfMagicMissile.itemName);
-		registerItemRender(wandOfDeath, WandOfDeath.itemName);
-		registerItemRender(wandOfFire, WandOfFire.itemName);
-		registerItemRender(wandOfGrowth, WandOfGrowth.itemName);
-		registerItemRender(wandOfHarvesting, WandOfHarvesting.itemName);
-		registerItemRender(wandOfHealing, WandOfHealing.itemName);
-		registerItemRender(wandOfIce, WandOfIce.itemName);
-		registerItemRender(wandOfMining, WandOfMining.itemName);
-		registerItemRender(wandOfTeleportation, WandOfTeleportation.itemName);
-		registerItemRender(wandOfLight, WandOfLight.itemName);
-		registerItemRender(wandOfGreaterLight, WandOfGreaterLight.itemName);
-		registerItemRender(wandOfStorms, WandOfStorms.itemName);
-		registerItemRender(wandOfLightning, WandOfLightning.itemName);
-		registerItemRender(wandOfBridging, WandOfBridging.itemName);
-		registerItemRender(wandOfClimbing, WandOfClimbing.itemName);
-		registerItemRender(wandOfIllusions, WandOfIllusions.itemName);
-		registerItemRender(wandOfRails, WandOfRails.itemName);
-		registerItemRender(wandOfWebbing, WandOfWebbing.itemName);
-		registerItemRender(wandOfLevitation, WandOfLevitation.itemName);
-		registerItemRender(wandOfTunneling, WandOfTunneling.itemName);
-
-		registerItemRender(net.minecraft.item.Item.getItemFromBlock(mageLight), MageLight.name);
-		registerItemRender(net.minecraft.item.Item.getItemFromBlock(feyRail), "feyrail");
-		registerItemRender(net.minecraft.item.Item.getItemFromBlock(feyRailPowered), "powered_feyrail");
-
 		for (int color = 0; color < robes.length; color++) {
 			for (int slot = 0; slot < robes[0].length; slot++) {
 				registerItemRender(robes[color][slot], "robes_" + colorSuffixes[color] + "_" + WizardingArmor.slotName.get(armorSlots[slot]));
 			}
 		}
 
-		registerItemRender(wizardHat, wizardHat.itemName);
-		registerItemRender(witchHat, witchHat.itemName);
-		registerItemRender(topHat, topHat.itemName);
 		for (Map.Entry<Block, IllusoryBlock> entry : IllusoryBlock.getLookUpTable().entrySet()) {
 			IllusoryBlock b = entry.getValue();
 			Block r = entry.getKey();
@@ -449,31 +318,6 @@ public class WonderfulWands {
 
 	private void registerItemRender(Item i, String itemName) {
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(i, 0, new ModelResourceLocation(MODID + ":" + itemName, "inventory"));
-	}
-
-	public static ItemStack wandItemStack(Wand w) {
-		ItemStack i = new ItemStack(w);
-		i.setRepairCost(w.getBaseRepairCost());
-		return i;
-	}
-
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
-		proxy.postInit(event);
-	}
-	/*
-	@EventHandler public void onServerStarting(FMLServerStartingEvent event)
-	{
-		// stub
-	}
-	*/
-
-	private static void registerBlock(Block b, String n) {
-		GameRegistry.register(b.setRegistryName(MODID, n));
-	}
-
-	private static void registerItem(Item i, String n) {
-		GameRegistry.register(i.setRegistryName(MODID, n));
 	}
 
 	public static String objectDump(Object o) throws IllegalArgumentException, IllegalAccessException {
@@ -538,5 +382,5 @@ public class WonderfulWands {
 		sb.append(" ]");
 		return sb.toString();
 	}
+	*/
 
-}

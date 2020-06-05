@@ -1,7 +1,6 @@
 package com.mcmoddev.wonderfulwands.common.items.wands;
 
-import com.mcmoddev.wonderfulwands.WonderfulWands;
-import com.mcmoddev.wonderfulwands.common.projectiles.EntityWandLightningBolt;
+import com.mcmoddev.wonderfulwands.common.projectiles.EntityBoltLightning;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,17 +19,12 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class WandOfLightning extends Wand {
-	public static final String itemName = "wand_lightning";
 
 	public static int cooldown = 20;
-
 	public static final double rangeMax = 16;
 	public static final double radius = 2;
-
 	public static int defaultCharges = 64;
-
 	public static final float damage = 8;
-
 	//	public static final int burnTime = 3;
 
 	/**
@@ -38,7 +32,6 @@ public class WandOfLightning extends Wand {
 	 */
 	public WandOfLightning() {
 		super(defaultCharges);
-		this.setTranslationKey(WonderfulWands.MODID + "_" + itemName);
 	}
 
 	@Override
@@ -58,10 +51,10 @@ public class WandOfLightning extends Wand {
 	 * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
 	 */
 	@Override
-	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord, EnumFacing blockFace, float par8, float par9, float par10) {
+	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord,
+							 EnumFacing blockFace, float par8, float par9, float par10) {
 		return false;
 	}
-
 
 	private final double piOver2 = Math.PI / 2;
 
@@ -71,7 +64,6 @@ public class WandOfLightning extends Wand {
 	 */
 	@Override
 	public ItemStack onItemUseFinish(ItemStack srcItemStack, World world, EntityLivingBase playerEntity) { //
-
 		if (playerEntity instanceof EntityPlayer && !((EntityPlayer) playerEntity).capabilities.isCreativeMode) {
 			if (isOutOfCharge(srcItemStack)) {
 				// wand out of magic
@@ -86,9 +78,11 @@ public class WandOfLightning extends Wand {
 
 			// zap all entities in a 16 block long, 4 block wide cylinder...
 			// first, calculate range limit (which will be shorter if we hit a solid block)
-			double vecX = (double) (-MathHelper.sin(playerEntity.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(playerEntity.rotationPitch / 180.0F * (float) Math.PI));
+			double vecX = (double) (-MathHelper.sin(playerEntity.rotationYaw / 180.0F
+				* (float) Math.PI) * MathHelper.cos(playerEntity.rotationPitch / 180.0F * (float) Math.PI));
 			double vecY = (double) (-MathHelper.sin(playerEntity.rotationPitch / 180.0F * (float) Math.PI));
-			double vecZ = (double) (MathHelper.cos(playerEntity.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(playerEntity.rotationPitch / 180.0F * (float) Math.PI));
+			double vecZ = (double) (MathHelper.cos(playerEntity.rotationYaw / 180.0F
+				* (float) Math.PI) * MathHelper.cos(playerEntity.rotationPitch / 180.0F * (float) Math.PI));
 
 			double range = 0;
 			double nx = playerEntity.posX, ny = playerEntity.posY + 1, nz = playerEntity.posZ;
@@ -110,13 +104,16 @@ public class WandOfLightning extends Wand {
 			final EntityLightningBolt fakeBolt = new EntityLightningBolt(world, nx, ny, nz, true);
 
 
-			// 	System.out.println("Lightning range = "+range);
+			//System.out.println("Lightning range = "+range);
 
-			//	AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(playerEntity.posX-range,playerEntity.posY-range,playerEntity.posZ-range,
+			//AxisAlignedBB bb
+			// = AxisAlignedBB.getBoundingBox(playerEntity.posX-range,playerEntity.posY-range,playerEntity.posZ-range,
 			//			playerEntity.posX+range,playerEntity.posY+range,playerEntity.posZ+range);
-			AxisAlignedBB bb = new AxisAlignedBB(playerEntity.posX - range, playerEntity.posY - range, playerEntity.posZ - range,
+			AxisAlignedBB bb = new AxisAlignedBB(playerEntity.posX - range,
+				playerEntity.posY - range, playerEntity.posZ - range,
 				playerEntity.posX + range, playerEntity.posY + range, playerEntity.posZ + range);
-			List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, bb); // ArrayList<EntityLivingBase>
+			List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, bb);
+			// ArrayList<EntityLivingBase>
 			for (int i = 0; i < entities.size(); i++) {
 				if (!(entities.get(i) instanceof EntityLivingBase)) continue;
 				EntityLivingBase e = (EntityLivingBase) entities.get(i);
@@ -144,11 +141,9 @@ public class WandOfLightning extends Wand {
 				}
 			}
 
-
 			playFadedSound(world, playerEntity.getPositionVector(), 64, SoundEvents.ENTITY_GENERIC_EXPLODE, 4F, 1.7F);
 			playSound(world, playerEntity.getPositionVector(), 64, SoundEvents.ENTITY_LIGHTNING_THUNDER, 1F, 1.7F);
-
-			world.spawnEntity(new EntityWandLightningBolt(world,
+			world.spawnEntity(new EntityBoltLightning(world,
 				playerEntity, playerEntity.posX, playerEntity.posY + 1, playerEntity.posZ,
 				playerEntity.rotationYaw, playerEntity.rotationPitch, range / rangeMax));
 		}

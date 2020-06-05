@@ -8,25 +8,30 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by Chris on 4/17/2016.
  */
-public class FeyRail extends BlockRail {
+public class BlockFeyRail extends BlockRail {
 
-	public FeyRail() {
+	public BlockFeyRail() {
 		super();
 	}
 
+	@Nonnull
 	@Override
-	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+	@SuppressWarnings("deprecation")
+	public List<ItemStack> getDrops(@Nonnull final IBlockAccess world, @Nonnull final BlockPos pos,
+									@Nonnull final IBlockState state, final int fortune) {
 		return Collections.emptyList();
 	}
 
 	@Override
-	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+	public boolean canSilkHarvest(@Nonnull final World world, @Nonnull final BlockPos pos,
+								  @Nonnull final IBlockState state, @Nonnull final EntityPlayer player) {
 		return false;
 	}
 }

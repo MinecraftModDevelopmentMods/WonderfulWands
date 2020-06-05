@@ -14,10 +14,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class WandOfMagicMissile extends Wand {
-	public static final String itemName = "wand_missiles";
 
 	public static int cooldown = 10;
-
 	public static int defaultCharges = 64;
 
 	/**
@@ -25,7 +23,6 @@ public class WandOfMagicMissile extends Wand {
 	 */
 	public WandOfMagicMissile() {
 		super(defaultCharges);
-		this.setTranslationKey(WonderfulWands.MODID + "_" + itemName);
 	}
 
 	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
@@ -47,7 +44,6 @@ public class WandOfMagicMissile extends Wand {
 	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord, EnumFacing blockFace, float par8, float par9, float par10) {
 		return false;
 	}
-
 
 	/**
 	 * Invoked when the player releases the right-click button
@@ -80,7 +76,6 @@ public class WandOfMagicMissile extends Wand {
 		}
 		return srcItemStack;
 	}
-
 
 	@Override
 	public int getBaseRepairCost() {

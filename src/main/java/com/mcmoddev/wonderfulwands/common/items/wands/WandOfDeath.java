@@ -1,6 +1,5 @@
 package com.mcmoddev.wonderfulwands.common.items.wands;
 
-import com.mcmoddev.wonderfulwands.WonderfulWands;
 import com.mcmoddev.wonderfulwands.common.projectiles.DeathSkull;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,16 +15,12 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class WandOfDeath extends Wand {
-	public static final String itemName = "wand_death";
 
 	public static int cooldown = 20;
-
-
 	public static int defaultCharges = 64;
 
 	public WandOfDeath() {
 		super(defaultCharges);
-		this.setTranslationKey(WonderfulWands.MODID + "_" + itemName);
 	}
 
 	/**
@@ -53,7 +48,8 @@ public class WandOfDeath extends Wand {
 	 * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
 	 */
 	@Override
-	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord, EnumFacing blockFace, float par8, float par9, float par10) {
+	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord,
+							 EnumFacing blockFace, float par8, float par9, float par10) {
 		return false;
 	}
 
@@ -62,7 +58,8 @@ public class WandOfDeath extends Wand {
 	 * Invoked when the player releases the right-click button
 	 */
 	@Override
-	public void onPlayerStoppedUsing(ItemStack srcItemStack, World world, EntityLivingBase playerEntity, int timeRemain) {
+	public void onPlayerStoppedUsing(ItemStack srcItemStack, World world, EntityLivingBase playerEntity,
+									 int timeRemain) {
 		super.onPlayerStoppedUsing(srcItemStack, world, playerEntity, timeRemain);
 	}
 
@@ -85,18 +82,20 @@ public class WandOfDeath extends Wand {
 		playSound(SoundEvents.ENTITY_WITHER_SHOOT, world, playerEntity);
 
 		if (!world.isRemote) {
-			double vecX = (double) (-MathHelper.sin(playerEntity.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(playerEntity.rotationPitch / 180.0F * (float) Math.PI));
+			double vecX = (double) (-MathHelper.sin(playerEntity.rotationYaw / 180.0F * (float) Math.PI)
+				* MathHelper.cos(playerEntity.rotationPitch / 180.0F * (float) Math.PI));
 			double vecY = (double) (-MathHelper.sin(playerEntity.rotationPitch / 180.0F * (float) Math.PI));
-			double vecZ = (double) (MathHelper.cos(playerEntity.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(playerEntity.rotationPitch / 180.0F * (float) Math.PI));
+			double vecZ = (double) (MathHelper.cos(playerEntity.rotationYaw / 180.0F * (float) Math.PI)
+				* MathHelper.cos(playerEntity.rotationPitch / 180.0F * (float) Math.PI));
 
 			double deltaX = (double) (-MathHelper.sin(playerEntity.rotationYaw / 180.0F * (float) Math.PI));
 			double deltaZ = (double) (MathHelper.cos(playerEntity.rotationYaw / 180.0F * (float) Math.PI));
 
-			world.spawnEntity(new DeathSkull(world, playerEntity, playerEntity.posX + deltaX, playerEntity.posY + 1, playerEntity.posZ + deltaZ, vecX, vecY, vecZ));
+			world.spawnEntity(new DeathSkull(world, playerEntity, playerEntity.posX + deltaX,
+				playerEntity.posY + 1, playerEntity.posZ + deltaZ, vecX, vecY, vecZ));
 		}
 		return srcItemStack;
 	}
-
 
 	@Override
 	public int getBaseRepairCost() {

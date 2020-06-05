@@ -1,6 +1,5 @@
 package com.mcmoddev.wonderfulwands.common.items.wands;
 
-import com.mcmoddev.wonderfulwands.WonderfulWands;
 import com.mcmoddev.wonderfulwands.util.RayTrace;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
@@ -17,19 +16,14 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class WandOfStorms extends Wand {
-	public static final String itemName = "wand_storm";
 
 	public static int cooldown = 20;
-
 	public static int defaultCharges = 64;
-
 	public static final int AOEdiameter = 64;
 
 	public WandOfStorms() {
 		super(defaultCharges);
-		this.setTranslationKey(WonderfulWands.MODID + "_" + itemName);
 	}
-
 
 	@Override
 	public int getBaseRepairCost() {
@@ -57,7 +51,6 @@ public class WandOfStorms extends Wand {
 		return false;
 	}
 
-
 	/**
 	 * Invoked when the player releases the right-click button
 	 */
@@ -72,7 +65,6 @@ public class WandOfStorms extends Wand {
 	 */
 	@Override
 	public ItemStack onItemUseFinish(ItemStack srcItemStack, World world, EntityLivingBase playerEntity) { //
-
 		if (playerEntity instanceof EntityPlayer && !((EntityPlayer) playerEntity).capabilities.isCreativeMode) {
 			if (isOutOfCharge(srcItemStack)) {
 				// wand out of magic
@@ -83,11 +75,8 @@ public class WandOfStorms extends Wand {
 		}
 
 		playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, world, playerEntity);
-
-
 		if (!world.isRemote) {
 			// drop lightning at looked-at location
-
 			RayTraceResult trace = RayTrace.rayTraceBlocksAndEntities(world, 64, playerEntity);
 			if (trace == null || trace.typeOfHit == RayTraceResult.Type.MISS) { // missed! Drop random lightning
 				int r = 32;
@@ -107,11 +96,7 @@ public class WandOfStorms extends Wand {
 				}
 				world.addWeatherEffect(new EntityLightningBolt(world, target.x, target.y, target.z, false));
 			}
-
-
 		}
 		return srcItemStack;
 	}
-
-
 }

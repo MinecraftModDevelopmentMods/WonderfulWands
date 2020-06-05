@@ -1,6 +1,5 @@
 package com.mcmoddev.wonderfulwands.common.items.wands;
 
-import com.mcmoddev.wonderfulwands.WonderfulWands;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,15 +10,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class WandOfHarvesting extends Wand {
-	public static final String itemName = "wand_harvesting";
 
 	public static int cooldown = 10;
-
 	public static int defaultCharges = 128;
 
 	public WandOfHarvesting() {
 		super(defaultCharges);
-		this.setTranslationKey(WonderfulWands.MODID + "_" + itemName);
 		this.setMaxDamage(defaultCharges + 1);
 	}
 
@@ -29,7 +25,8 @@ public class WandOfHarvesting extends Wand {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord, EnumFacing blockFace, float par8, float par9, float par10) {
+	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord,
+							 EnumFacing blockFace, float par8, float par9, float par10) {
 		int targetX = coord.getX(), targetY = coord.getY(), targetZ = coord.getZ();
 		if (isHarvestable(world, coord)) {
 			if (!playerEntity.capabilities.isCreativeMode) {
@@ -51,7 +48,6 @@ public class WandOfHarvesting extends Wand {
 			}
 
 			playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, world, playerEntity);
-
 			return true;
 		}
 		return false;

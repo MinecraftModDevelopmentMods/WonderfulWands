@@ -22,17 +22,13 @@ import net.minecraft.world.World;
  * @author DrCyano
  */
 public class WandOfGreaterLight extends Wand {
-	public static final String itemName = "wand_greater_light";
 
 	public static int cooldown = 10;
-
 	public static int defaultCharges = 64;
 
 	public WandOfGreaterLight() {
 		super(defaultCharges);
-		this.setTranslationKey(WonderfulWands.MODID + "_" + itemName);
 	}
-
 
 	@Override
 	public int getBaseRepairCost() {
@@ -52,7 +48,7 @@ public class WandOfGreaterLight extends Wand {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer playerEntity, EnumHand hand) {
 		playerEntity.setActiveHand(hand);
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerEntity.getHeldItemMainhand());
+		return new ActionResult<>(EnumActionResult.SUCCESS, playerEntity.getHeldItemMainhand());
 	}
 
 	/**
@@ -61,14 +57,18 @@ public class WandOfGreaterLight extends Wand {
 	 * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
 	 */
 	@Override
-	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord, EnumFacing blockFace, float par8, float par9, float par10) {
+	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord,
+							 EnumFacing blockFace, float par8, float par9, float par10) {
 		return false;
 	}
 
 	@Override
-	public void onPlayerStoppedUsing(ItemStack srcItemStack, World world, EntityLivingBase playerEntity, int timeRemain) {
+	public void onPlayerStoppedUsing(ItemStack srcItemStack, World world, EntityLivingBase playerEntity,
+									 int timeRemain) {
 		int chargetime = this.getMaxItemUseDuration(srcItemStack) - timeRemain;
-		if (chargetime < 5) return;
+		if (chargetime < 5) {
+			return;
+		}
 		BlockPos center = playerEntity.getPosition();
 		if (playerEntity instanceof EntityPlayer && !((EntityPlayer) playerEntity).capabilities.isCreativeMode) {
 			if (isOutOfCharge(srcItemStack)) {
@@ -78,7 +78,6 @@ public class WandOfGreaterLight extends Wand {
 			}
 			srcItemStack.damageItem(1, playerEntity);
 		}
-
 
 		if (!world.isRemote) {
 			EntityLightWisp[] e = new EntityLightWisp[9];
@@ -95,12 +94,7 @@ public class WandOfGreaterLight extends Wand {
 				world.spawnEntity(e[i]);
 			}
 		}
-
 		playSound(SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, world, playerEntity);
-
 		return;
-
 	}
-
-
 }

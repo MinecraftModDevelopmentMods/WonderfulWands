@@ -1,6 +1,5 @@
 package com.mcmoddev.wonderfulwands.common.items.wands;
 
-import com.mcmoddev.wonderfulwands.WonderfulWands;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -11,18 +10,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class WandOfMining extends Wand {
-	public static final String itemName = "wand_mining";
 
 	public static int cooldown = 10;
-
 	public static int defaultCharges = 256;
 
 	public WandOfMining() {
 		super(defaultCharges);
-		this.setTranslationKey(WonderfulWands.MODID + "_" + itemName);
 		this.setMaxDamage(defaultCharges + 1);
 	}
-
 
 	@Override
 	public int getBaseRepairCost() {
@@ -45,7 +40,6 @@ public class WandOfMining extends Wand {
 			}
 		}
 		return success;
-
 	}
 
 	private final ItemStack fauxPick = new ItemStack(Items.STONE_PICKAXE);
@@ -63,7 +57,6 @@ public class WandOfMining extends Wand {
 			return false;
 		}
 
-
 		if (fauxPick.canHarvestBlock(targetBlock) || targetBlock.getBlockHardness(world, coord) < 1.0F) {
 			// mine it
 			int fortuneLevel = 0;
@@ -73,7 +66,5 @@ public class WandOfMining extends Wand {
 			return true;
 		}
 		return false;
-
 	}
-
 }

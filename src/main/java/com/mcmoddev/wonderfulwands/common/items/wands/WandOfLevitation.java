@@ -1,6 +1,5 @@
 package com.mcmoddev.wonderfulwands.common.items.wands;
 
-import com.mcmoddev.wonderfulwands.WonderfulWands;
 import com.mcmoddev.wonderfulwands.util.RayTrace;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -19,30 +18,24 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class WandOfLevitation extends Wand {
-	public static final String itemName = "wand_levitation";
-
 
 	public static int defaultCharges = 64;
 	public static int range = 16;
 	public static int duration = 5 * 20;
 
-
 	public WandOfLevitation() {
 		super(defaultCharges);
-		this.setTranslationKey(WonderfulWands.MODID + "_" + itemName);
 	}
-
 
 	@Override
 	public int getBaseRepairCost() {
 		return 4;
 	}
 
-
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer playerEntity, EnumHand hand) {
 		playerEntity.setActiveHand(hand);
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerEntity.getHeldItemMainhand());
+		return new ActionResult<>(EnumActionResult.SUCCESS, playerEntity.getHeldItemMainhand());
 	}
 
 	/**
@@ -59,7 +52,8 @@ public class WandOfLevitation extends Wand {
 	 * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
 	 */
 	@Override
-	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord, EnumFacing blockFace, float par8, float par9, float par10) {
+	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord,
+							 EnumFacing blockFace, float par8, float par9, float par10) {
 		return false;
 	}
 
@@ -72,8 +66,8 @@ public class WandOfLevitation extends Wand {
 	 * Invoked when the player releases the right-click button
 	 */
 	@Override
-	public void onPlayerStoppedUsing(ItemStack srcItemStack, World world, EntityLivingBase playerEntity, int timeRemain) {
-
+	public void onPlayerStoppedUsing(ItemStack srcItemStack, World world, EntityLivingBase playerEntity,
+									 int timeRemain) {
 		if (playerEntity instanceof EntityPlayer && !((EntityPlayer) playerEntity).capabilities.isCreativeMode) {
 			if (isOutOfCharge(srcItemStack)) {
 				// wand out of magic
@@ -96,12 +90,12 @@ public class WandOfLevitation extends Wand {
 			EntityLivingBase e = (EntityLivingBase) target;
 			playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, world, playerEntity);
 			playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, world, e);
-			e.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("levitation"), duration, 0));
+			e.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("levitation"), duration,
+				0));
 			e.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("glowing"), duration, 0));
 			if (playerEntity instanceof EntityPlayer && !((EntityPlayer) playerEntity).capabilities.isCreativeMode) {
 				srcItemStack.damageItem(1, playerEntity);
 			}
 		}
 	}
-
 }

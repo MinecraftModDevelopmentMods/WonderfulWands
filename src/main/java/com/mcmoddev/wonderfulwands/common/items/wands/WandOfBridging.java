@@ -1,10 +1,10 @@
 package com.mcmoddev.wonderfulwands.common.items.wands;
 
-import com.mcmoddev.wonderfulwands.WonderfulWands;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
@@ -16,8 +16,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class WandOfBridging extends Wand {
-	public static final String itemName = "wand_bridge";
 
 	public static int cooldown = 10;
 
@@ -27,17 +28,16 @@ public class WandOfBridging extends Wand {
 
 	private final Block bridgeBlock;
 
-	public WandOfBridging(Block bridgeBlock) {
+	public WandOfBridging() {
 		super(defaultCharges);
-		this.setTranslationKey(WonderfulWands.MODID + "_" + itemName);
-		this.bridgeBlock = bridgeBlock;
+		this.bridgeBlock = Blocks.COBBLESTONE;
 	}
 
 	/**
-	 * returns the action that specifies what animation to play when the items is being used
+	 * returns the action that specifies what animation to play when the items is being used.
 	 */
 	@Override
-	public EnumAction getItemUseAction(ItemStack par1ItemStack) {
+	public EnumAction getItemUseAction(final ItemStack itemStack) {
 		return EnumAction.BOW;
 	}
 
@@ -47,32 +47,35 @@ public class WandOfBridging extends Wand {
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
+	public int getMaxItemUseDuration(@Nonnull final ItemStack itemStack) {
 		return 7200;
 	}
 
 	/**
 	 * Callback for item usage, invoked when right-clicking on a block. If the item
 	 * does something special on right clicking, he will have one of those. Return
-	 * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
+	 * True if something happen and false if it don't. This is for ITEMS, not BLOCKS.
 	 */
 	@Override
-	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord, EnumFacing blockFace, float par8, float par9, float par10) {
+	public boolean onItemUse(final ItemStack itemStack, final EntityPlayer playerEntity, final World world,
+							 final BlockPos coord, final EnumFacing blockFace,
+							 final float par8, final float par9, final float par10) {
 		return false;
 	}
 
-
+	@Nonnull
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer playerEntity, EnumHand hand) {
+	public ActionResult<ItemStack> onItemRightClick(@Nonnull final World world, final EntityPlayer playerEntity,
+													@Nonnull final EnumHand hand) {
 		playerEntity.setActiveHand(hand);
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerEntity.getHeldItemMainhand());
+		return new ActionResult<>(EnumActionResult.SUCCESS, playerEntity.getHeldItemMainhand());
 	}
 
 	@Override
-	public void onPlayerStoppedUsing(ItemStack srcItemStack, World world, EntityLivingBase playerEntity, int timeRemain) {
-
+	public void onPlayerStoppedUsing(@Nonnull final ItemStack itemStack, @Nonnull final World world,
+									 @Nonnull final EntityLivingBase playerEntity, final int timeRemain) {
 		if (playerEntity instanceof EntityPlayer && !((EntityPlayer) playerEntity).capabilities.isCreativeMode) {
-			if (isOutOfCharge(srcItemStack)) {
+			if (isOutOfCharge(itemStack)) {
 				// wand out of magic
 				playSound(noChargeAttackSound, world, playerEntity);
 				return;
@@ -114,24 +117,24 @@ public class WandOfBridging extends Wand {
 		if (blocksChanged > 0) {
 			playSound(SoundEvents.ENTITY_PLAYER_LEVELUP, world, playerEntity);
 			if (playerEntity instanceof EntityPlayer && !((EntityPlayer) playerEntity).capabilities.isCreativeMode) {
-				srcItemStack.damageItem(1, playerEntity);
+				itemStack.damageItem(1, playerEntity);
 			}
 		}
-
-		return;
 	}
 
-	private int placeBridgeBlock(World world, BlockPos coord) {
-		if (world.isRemote) return 0;
+	private int placeBridgeBlock(@Nonnull final World world, final BlockPos coord) {
+		if (world.isRemote) {
+			return 0;
+		}
 		if (world.isAirBlock(coord)) {
 			world.setBlockState(coord, bridgeBlock.getDefaultState());
 			return 1;
 		}
 		IBlockState current = world.getBlockState(coord);
-		if (current.getMaterial().blocksMovement()) return 0;
+		if (current.getMaterial().blocksMovement()) {
+			return 0;
+		}
 		world.setBlockState(coord, bridgeBlock.getDefaultState());
 		return 1;
 	}
-
-
 }

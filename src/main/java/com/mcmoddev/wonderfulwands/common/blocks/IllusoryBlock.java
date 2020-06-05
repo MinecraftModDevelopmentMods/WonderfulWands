@@ -16,36 +16,41 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class IllusoryBlock extends net.minecraft.block.Block {
+public class IllusoryBlock extends Block {
 
-	private static final Map<Block, IllusoryBlock> blockLookup = new HashMap<Block, IllusoryBlock>();
+	private static final Map<Block, IllusoryBlock> blockLookup = new HashMap<>();
 
 	public final String name;
+	public static BlockPos pos;
+	public static IBlockAccess access;
 
-	public IllusoryBlock(Block sourceBlock) {
+	public IllusoryBlock(final Block sourceBlock) {
 		this(
-			sourceBlock.getMapColor(sourceBlock.getDefaultState()),
+			sourceBlock.getMapColor(sourceBlock.getDefaultState(), access, pos),
 			"illusion_" + (sourceBlock.getTranslationKey().replace("tile.", "")),
 			sourceBlock, sourceBlock.getTranslationKey().replace("tile.", "")
 		);
 	}
 
 
-	public IllusoryBlock(MapColor color, String name, Block sourceBlock) {
+	public IllusoryBlock(final MapColor color, final String name, final Block sourceBlock) {
 		this(color, name, sourceBlock, sourceBlock.getTranslationKey().replace("tile.", ""));
 	}
 
 
-	public IllusoryBlock(MapColor color, String name, Block sourceBlock, String sourceBlockName) {
+	public IllusoryBlock(final MapColor color, final String name, final Block sourceBlock,
+						 final String sourceBlockName) {
 		this(color, name, sourceBlock, sourceBlockName, sourceBlockName);
 	}
 
-	public IllusoryBlock(MapColor color, String name, Block sourceBlock, String sourceBlockName, String sourceBlockUnlocalizedName) {
+	public IllusoryBlock(final MapColor color, final String name, final Block sourceBlock, final String sourceBlockName,
+						 final String sourceBlockUnlocalizedName) {
 		super(Material.CARPET, color);
 		this.setCreativeTab(CreativeTabs.MISC);
 		this.setHardness(0.0F);
@@ -55,8 +60,8 @@ public class IllusoryBlock extends net.minecraft.block.Block {
 		blockLookup.put(sourceBlock, this);
 	}
 
-	public static IllusoryBlock getIllusionForBlock(Block b) {
-		return blockLookup.get(b);
+	public static IllusoryBlock getIllusionForBlock(final Block block) {
+		return blockLookup.get(block);
 	}
 
 	public static Map<Block, IllusoryBlock> getLookUpTable() {
@@ -65,18 +70,20 @@ public class IllusoryBlock extends net.minecraft.block.Block {
 
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+	@SuppressWarnings("deprecation")
+	public AxisAlignedBB getCollisionBoundingBox(@Nonnull final IBlockState state, @Nonnull final IBlockAccess world,
+												 @Nonnull final BlockPos blockPos) {
 		return NULL_AABB;
 	}
 
-
 	@Override
-	public Item getItemDropped(IBlockState state, Random prng, int fortune) {
+	public Item getItemDropped(@Nonnull final IBlockState state, @Nonnull final Random prng, final int fortune) {
 		return null;
 	}
 
 	@Override
-	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+	public boolean canSilkHarvest(@Nonnull final World world, @Nonnull final BlockPos blockPos,
+								  @Nonnull final IBlockState state, @Nonnull final EntityPlayer player) {
 		return true;
 	}
 
@@ -85,12 +92,13 @@ public class IllusoryBlock extends net.minecraft.block.Block {
 	 * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
 	 */
 	@Override
-	public boolean isOpaqueCube(IBlockState bs) {
+	@SuppressWarnings("deprecation")
+	public boolean isOpaqueCube(@Nonnull final IBlockState blockState) {
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState bs) {
+	public boolean isFullCube(@Nonnull final IBlockState blockState) {
 		return false;
 	}
 

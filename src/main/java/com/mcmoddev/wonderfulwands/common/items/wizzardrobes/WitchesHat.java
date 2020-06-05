@@ -1,7 +1,8 @@
-package com.mcmoddev.wonderfulwands.common.items.wizardrobes;
+package com.mcmoddev.wonderfulwands.common.items.wizzardrobes;
 
-import com.mcmoddev.wonderfulwands.ClientProxy;
 import com.mcmoddev.wonderfulwands.WonderfulWands;
+import com.mcmoddev.wonderfulwands.client.WitchHatRenderer;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
@@ -15,19 +16,17 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  *
  * @author cybergnome
  */
-public class WitchsHat extends WizardsHat {
-	//private final WizardHatRenderer renderer;
-	public final String itemName = "hat_witch";
+public class WitchesHat extends WizardsHat {
 
-	public WitchsHat() {
+	public WitchesHat() {
 		super();
-		this.setTranslationKey(WonderfulWands.MODID + "_" + itemName);
+		this.setCreativeTab(WonderfulWands.TAB_ROBES);
 	}
-
 
 	@SideOnly(Side.CLIENT)
-	public net.minecraft.client.model.ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, net.minecraft.client.model.ModelBiped biped) {
-		return ClientProxy.witchHatRenderer;
+	public ModelBiped getArmorModel(final EntityLivingBase entityLiving,
+									final ItemStack itemStack, final EntityEquipmentSlot armorSlot,
+									final ModelBiped biped) {
+		return new WitchHatRenderer();
 	}
-
 }

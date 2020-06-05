@@ -1,6 +1,5 @@
 package com.mcmoddev.wonderfulwands.common.items.wands;
 
-import com.mcmoddev.wonderfulwands.WonderfulWands;
 import com.mcmoddev.wonderfulwands.common.blocks.IllusoryBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -12,18 +11,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class WandOfIllusions extends Wand {
-	public static final String itemName = "wand_illusion";
 
 	public static int cooldown = 10;
-
 	public static int defaultCharges = 64;
 
 	public WandOfIllusions() {
 		super(defaultCharges);
-		this.setTranslationKey(WonderfulWands.MODID + "_" + itemName);
 		this.setMaxDamage(defaultCharges + 1);
 	}
-
 
 	@Override
 	public int getBaseRepairCost() {
@@ -31,7 +26,8 @@ public class WandOfIllusions extends Wand {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord, EnumFacing blockFace, float par8, float par9, float par10) {
+	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord,
+							 EnumFacing blockFace, float par8, float par9, float par10) {
 		if (!playerEntity.capabilities.isCreativeMode) {
 			if (isOutOfCharge(srcItemStack)) {
 				// wand out of magic
@@ -47,7 +43,6 @@ public class WandOfIllusions extends Wand {
 			}
 		}
 		return success;
-
 	}
 
 	/**
@@ -65,7 +60,5 @@ public class WandOfIllusions extends Wand {
 		IBlockState newBlock = illusoryBlock.getDefaultState();
 		world.setBlockState(coord, newBlock);
 		return true;
-
 	}
-
 }

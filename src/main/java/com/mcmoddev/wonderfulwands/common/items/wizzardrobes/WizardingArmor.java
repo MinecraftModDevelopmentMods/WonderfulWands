@@ -1,4 +1,4 @@
-package com.mcmoddev.wonderfulwands.common.items.wizardrobes;
+package com.mcmoddev.wonderfulwands.common.items.wizzardrobes;
 
 import com.mcmoddev.wonderfulwands.WonderfulWands;
 import net.minecraft.entity.Entity;
@@ -34,12 +34,10 @@ public class WizardingArmor extends ItemArmor {
 
 	public WizardingArmor(ArmorMaterial mat, String color, EntityEquipmentSlot armorSlot) {
 		super(mat, mat.ordinal(), armorSlot);
-		//super(ArmorMaterial.CHAIN,1, armorSlot); // does render as chainmail
-		//	// add icons
-		//	func_111206_d("wizardrobes:robes"+armorSlot);
+		//super(ArmorMaterial.CHAIN,1, armorSlot); // does render as chainmail.
 		String name = itemName + "_" + color + "_" + slotName.get(armorSlot);
 		this.setTranslationKey(WonderfulWands.MODID + "_" + name);
-		this.setCreativeTab(WonderfulWands.robesTab);
+		this.setCreativeTab(WonderfulWands.TAB_ROBES);
 		this.color = color;
 	}
 

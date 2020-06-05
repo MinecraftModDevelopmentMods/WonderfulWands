@@ -1,6 +1,5 @@
 package com.mcmoddev.wonderfulwands.common.items.wands;
 
-import com.mcmoddev.wonderfulwands.WonderfulWands;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStoneBrick;
 import net.minecraft.block.BlockStoneBrick.EnumType;
@@ -17,17 +16,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class WandOfGrowth extends Wand {
-	public static final String itemName = "wand_growth";
 
 	public static int cooldown = 10;
-
 	public static int defaultCharges = 128;
-
 	static final PropertyEnum<EnumType> stoneblockVariantKey = PropertyEnum.create("variant", BlockStoneBrick.EnumType.class);
 
 	public WandOfGrowth() {
 		super(defaultCharges);
-		this.setTranslationKey(WonderfulWands.MODID + "_" + itemName);
 	}
 
 	@Override
@@ -36,7 +31,8 @@ public class WandOfGrowth extends Wand {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord, EnumFacing blockFace, float par8, float par9, float par10) {
+	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord,
+							 EnumFacing blockFace, float par8, float par9, float par10) {
 		if (!playerEntity.capabilities.isCreativeMode) {
 			if (isOutOfCharge(srcItemStack)) {
 				// wand out of magic
@@ -97,7 +93,7 @@ public class WandOfGrowth extends Wand {
 				return true;
 			}
 		}
-		return ItemDye.applyBonemeal(fauxItemStack, world, coord, playerEntity);
+		return ItemDye.applyBonemeal(fauxItemStack, world, coord);
 	}
 
 }

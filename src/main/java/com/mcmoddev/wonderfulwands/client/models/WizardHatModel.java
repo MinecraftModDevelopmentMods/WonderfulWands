@@ -1,4 +1,4 @@
-package com.mcmoddev.wonderfulwands.common.items.wizardrobes;
+package com.mcmoddev.wonderfulwands.client.models;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -7,8 +7,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class WizardHatModel extends ModelBase {
-	final ModelRenderer hat;
 
+	final ModelRenderer hat;
 
 	public WizardHatModel() {
 		int h = 2;

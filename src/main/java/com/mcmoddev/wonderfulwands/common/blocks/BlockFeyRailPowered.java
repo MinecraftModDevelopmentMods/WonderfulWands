@@ -16,23 +16,24 @@ import java.util.List;
 /**
  * Created by Chris on 4/17/2016.
  */
-public class PoweredFeyRail extends BlockRailPowered {
-	public PoweredFeyRail() {
+public class BlockFeyRailPowered extends BlockRailPowered {
+	public BlockFeyRailPowered() {
 		super();
-		this.setDefaultState(this.blockState.getBaseState().withProperty(SHAPE, BlockRailBase.EnumRailDirection.NORTH_SOUTH).withProperty(POWERED, Boolean.valueOf(true)));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(SHAPE,
+			BlockRailBase.EnumRailDirection.NORTH_SOUTH).withProperty(POWERED, Boolean.TRUE));
 	}
 
 	@Override
 	protected void updateState(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock) {
 		// disable by redstone instead of powered by redstone
-		boolean wasPowered = ((Boolean) state.getValue(POWERED)).booleanValue();
+		boolean wasPowered = state.getValue(POWERED);
 		boolean isPowered = !worldIn.isBlockPowered(pos);
 
 		if (isPowered != wasPowered) {
-			worldIn.setBlockState(pos, state.withProperty(POWERED, Boolean.valueOf(isPowered)), 3);
+			worldIn.setBlockState(pos, state.withProperty(POWERED, isPowered), 3);
 			worldIn.notifyNeighborsOfStateChange(pos.down(), this, isPowered);
 
-			if (((BlockRailBase.EnumRailDirection) state.getValue(SHAPE)).isAscending()) {
+			if (state.getValue(SHAPE).isAscending()) {
 				worldIn.notifyNeighborsOfStateChange(pos.up(), this, isPowered);
 			}
 		}
@@ -45,7 +46,7 @@ public class PoweredFeyRail extends BlockRailPowered {
 		double dz = cart.motionZ;
 		double speed = Math.sqrt(dx * dx + dz * dz);
 		if (speed > 0) {
-			if (world.getBlockState(pos).getValue(POWERED).booleanValue()) {
+			if (world.getBlockState(pos).getValue(POWERED)) {
 				// act as an accelerator
 				cart.motionX = maxSpeed * dx / speed;
 				cart.motionZ = maxSpeed * dz / speed;

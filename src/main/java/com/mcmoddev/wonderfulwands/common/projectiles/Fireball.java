@@ -12,8 +12,8 @@ import java.util.List;
 
 public class Fireball extends EntityLargeFireball {
 
-
-	public Fireball(World par1World, EntityLivingBase par2EntityLivingBase, double posX, double posY, double posZ, double vX, double vY, double vZ) {
+	public Fireball(World par1World, EntityLivingBase par2EntityLivingBase, double posX, double posY, double posZ,
+					double vX, double vY, double vZ) {
 		super(par1World, par2EntityLivingBase, vX, vY, vZ);
 		this.setPosition(posX, posY, posZ);
 		Double d3 = (double) MathHelper.sqrt(vX * vX + vY * vY + vZ * vZ);
@@ -27,7 +27,8 @@ public class Fireball extends EntityLargeFireball {
 		if (!this.world.isRemote) {
 			double radius = 2.0;
 			if (impact.hitVec != null) {
-				AxisAlignedBB aoe = new AxisAlignedBB(impact.hitVec.x - radius, impact.hitVec.y - radius, impact.hitVec.z - radius,
+				AxisAlignedBB aoe = new AxisAlignedBB(impact.hitVec.x - radius, impact.hitVec.y - radius,
+					impact.hitVec.z - radius,
 					impact.hitVec.x + radius, impact.hitVec.y + radius, impact.hitVec.z + radius);
 				List<EntityLivingBase> collateralDamage = world.getEntitiesWithinAABB(EntityLivingBase.class, aoe);
 				for (EntityLivingBase victim : collateralDamage) {

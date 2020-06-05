@@ -1,4 +1,4 @@
-package com.mcmoddev.wonderfulwands.common.items.wizardrobes;
+package com.mcmoddev.wonderfulwands.client;
 
 import com.mcmoddev.wonderfulwands.WonderfulWands;
 import net.minecraft.util.ResourceLocation;

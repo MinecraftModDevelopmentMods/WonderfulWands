@@ -1,6 +1,6 @@
 package com.mcmoddev.wonderfulwands.common.items.wands;
 
-import com.mcmoddev.wonderfulwands.WonderfulWands;
+import com.mcmoddev.wonderfulwands.init.WonderfulBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,16 +12,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class WandOfRails extends Wand {
-	public static final String itemName = "wand_rails";
 
 	public static int cooldown = 10;
-
 	public static int defaultCharges = 256;
-
 
 	public WandOfRails() {
 		super(defaultCharges);
-		this.setTranslationKey(WonderfulWands.MODID + "_" + itemName);
 	}
 
 	@Override
@@ -30,11 +26,10 @@ public class WandOfRails extends Wand {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord, EnumFacing blockFace, float par8, float par9, float par10) {
+	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord,
+							 EnumFacing blockFace, float par8, float par9, float par10) {
 		return false;
-
 	}
-
 
 	/**
 	 * Called each tick as long the item is on a player inventory. Uses by maps to check if is on a player hand and
@@ -60,15 +55,17 @@ public class WandOfRails extends Wand {
 			BlockPos lastPos = getLastPosition(item);
 			IBlockState rail;
 			if (lastPos == null // last position not set
-				|| (lastPos.getY() != pos.getY() && (lastPos.getX() == pos.getX() || lastPos.getZ() == pos.getZ())) // slope
-				|| (getUnpoweredRailCount(item) > 6 && (lastPos.getX() == pos.getX() || lastPos.getZ() == pos.getZ())) // distance from last powered rail
-				|| (pos.distanceSq(lastPos) > 8 && (lastPos.getX() == pos.getX() || lastPos.getZ() == pos.getZ())) // discontinuous rail
-			) {
-				rail = WonderfulWands.feyRailPowered.getDefaultState();
+				|| (lastPos.getY() != pos.getY() && (lastPos.getX() == pos.getX() || lastPos.getZ() == pos.getZ()))
+				// slope
+				|| (getUnpoweredRailCount(item) > 6 && (lastPos.getX() == pos.getX() || lastPos.getZ() == pos.getZ()))
+				// distance from last powered rail
+				|| (pos.distanceSq(lastPos) > 8 && (lastPos.getX() == pos.getX() || lastPos.getZ() == pos.getZ()))) {
+				// discontinuous rail
+				rail = WonderfulBlocks.FEY_RAIL_POWERED.getDefaultState();
 				resetUnpoweredRailCount(item);
 			} else {
 				// non-powered rail (can make turns)
-				rail = WonderfulWands.feyRail.getDefaultState();
+				rail = WonderfulBlocks.FEY_RAIL.getDefaultState();
 				incrementUnpoweredRailCount(item);
 			}
 			w.setBlockState(pos, rail, 3);
@@ -103,7 +100,6 @@ public class WandOfRails extends Wand {
 		i.setTagCompound(itemTag);
 	}
 
-
 	private static int getUnpoweredRailCount(ItemStack i) {
 		if (i.hasTagCompound() && i.getTagCompound().hasKey("UC")) {
 			return i.getTagCompound().getInteger("UC");
@@ -120,7 +116,6 @@ public class WandOfRails extends Wand {
 			itemTag = new NBTTagCompound();
 			itemTag.setInteger("UC", 1);
 		}
-
 		i.setTagCompound(itemTag);
 	}
 
@@ -134,5 +129,4 @@ public class WandOfRails extends Wand {
 		itemTag.setInteger("UC", 0);
 		i.setTagCompound(itemTag);
 	}
-
 }

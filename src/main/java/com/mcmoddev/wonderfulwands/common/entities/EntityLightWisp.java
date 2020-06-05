@@ -1,6 +1,6 @@
 package com.mcmoddev.wonderfulwands.common.entities;
 
-import com.mcmoddev.wonderfulwands.WonderfulWands;
+import com.mcmoddev.wonderfulwands.init.WonderfulBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
@@ -12,6 +12,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.Random;
 
@@ -66,7 +67,9 @@ public class EntityLightWisp extends net.minecraft.entity.EntityLivingBase {
 	@Override
 	public void onEntityUpdate() {
 		super.onEntityUpdate();
-		if (world.isRemote) return;
+		if (world.isRemote) {
+			return;
+		}
 		--lifeCounter;
 		long time = this.world.getTotalWorldTime();
 		if (time > nextUpdateTime) {
@@ -91,12 +94,12 @@ public class EntityLightWisp extends net.minecraft.entity.EntityLivingBase {
 	}
 
 	@Override
-	public ItemStack getItemStackFromSlot(EntityEquipmentSlot s) {
+	public ItemStack getItemStackFromSlot(@Nonnull final EntityEquipmentSlot slot) {
 		return null;
 	}
 
 	@Override
-	public void setItemStackToSlot(EntityEquipmentSlot s, ItemStack i) {
+	public void setItemStackToSlot(@Nonnull final EntityEquipmentSlot slot, @Nonnull final ItemStack itemStack) {
 		// do nothing
 	}
 
@@ -105,28 +108,33 @@ public class EntityLightWisp extends net.minecraft.entity.EntityLivingBase {
 		return EnumHandSide.LEFT;
 	}
 
-
-	private int getLight(BlockPos coord) {
-		if (coord.getY() < 0 || coord.getY() > 255) return 16;
+	private int getLight(final BlockPos coord) {
+		if (coord.getY() < 0 || coord.getY() > 255) {
+			return 16;
+		}
 		IBlockState bs = world.getBlockState(coord);
-		if (bs.isFullBlock()) return 16;
-		if (!(world.getChunkFromBlockCoords(coord).isLoaded())) return 16;
-		return world.getChunkFromBlockCoords(coord).getLightFor(EnumSkyBlock.BLOCK, coord);
+		if (bs.isFullBlock()) {
+			return 16;
+		}
+		if (!(world.getChunk(coord).isLoaded())) {
+			return 16;
+		}
+		return world.getChunk(coord).getLightFor(EnumSkyBlock.BLOCK, coord);
 	}
 
-	private boolean canPlace(BlockPos coord) {
+	private boolean canPlace(final BlockPos coord) {
 		return world.isAirBlock(coord);
 	}
 
 
 	public void turnIntoMageLight() {
-		world.setBlockState(getPosition(), WonderfulWands.mageLight.getDefaultState());
+		world.setBlockState(getPosition(), WonderfulBlocks.MAGE_LIGHT.getDefaultState());
 		this.isDead = true;
 		world.removeEntity(this);
 	}
 
 
-	public void wanderFrom(BlockPos blockCoord, int light) {
+	public void wanderFrom(final BlockPos blockCoord, int light) {
 		// first, check if neighbor is darker than here
 		BlockPos target = null;
 		BlockPos[] coords = new BlockPos[4];

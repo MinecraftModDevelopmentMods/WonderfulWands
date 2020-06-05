@@ -11,12 +11,14 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public abstract class RayTrace {
+
 	public static RayTraceResult rayTraceBlocksAndEntities(World w, double maxRange, EntityLivingBase source) {
 		double rangeSqr = maxRange * maxRange;
 		Vec3d rayOrigin = new Vec3d(source.posX, source.posY + source.getEyeHeight(), source.posZ);
 		Vec3d rayDirection = source.getLookVec();
 		BlockPos srcPos = source.getPosition();
-		AxisAlignedBB aoi = new AxisAlignedBB(srcPos.getX() - maxRange, srcPos.getY() - maxRange, srcPos.getZ() - maxRange,
+		AxisAlignedBB aoi = new AxisAlignedBB(srcPos.getX() - maxRange, srcPos.getY() - maxRange,
+			srcPos.getZ() - maxRange,
 			srcPos.getX() + maxRange, srcPos.getY() + maxRange, srcPos.getZ() + maxRange);
 		List<Entity> entities = w.getEntitiesWithinAABBExcludingEntity(source, aoi);
 		double closestDistSqr = Double.MAX_VALUE;
@@ -37,17 +39,21 @@ public abstract class RayTrace {
 			}
 		}
 		if (closestEntity == null) {
-			return w.rayTraceBlocks(rayOrigin, rayOrigin.add(mul(rayDirection, maxRange)), true, false, false);
+			return w.rayTraceBlocks(rayOrigin, rayOrigin.add(mul(rayDirection, maxRange)), true,
+				false, false);
 		} else {
-			Vec3d pos = new Vec3d(closestEntity.posX, closestEntity.posY + closestEntity.getEyeHeight(), closestEntity.posZ);
+			Vec3d pos = new Vec3d(closestEntity.posX, closestEntity.posY + closestEntity.getEyeHeight(),
+				closestEntity.posZ);
 			RayTraceResult entityCollision = new RayTraceResult(closestEntity, pos);
 			return entityCollision;
 		}
 	}
 
 	public static boolean rayIntersectsBoundingBox(Vec3d rayOrigin, Vec3d rayDirection, AxisAlignedBB box) {
-		if (box == null) return false;
-		// algorithm from http://gamedev.stackexchange.com/questions/18436/most-efficient-aabb-vs-ray-collision-algorithms
+		if (box == null) {
+			return false;
+		}
+		//algorithm from http://gamedev.stackexchange.com/questions/18436/most-efficient-aabb-vs-ray-collision-algorithms
 		Vec3d inverse = new Vec3d(1.0 / rayDirection.x, 1.0 / rayDirection.y, 1.0 / rayDirection.z);
 		double t1 = (box.minX - rayOrigin.x) * inverse.x;
 		double t2 = (box.maxX - rayOrigin.x) * inverse.x;
@@ -68,7 +74,6 @@ public abstract class RayTrace {
 		if (tmin > tmax) {
 			return false;
 		}
-
 		return true;
 	}
 

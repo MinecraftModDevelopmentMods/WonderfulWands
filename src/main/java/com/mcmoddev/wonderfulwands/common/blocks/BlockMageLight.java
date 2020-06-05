@@ -18,19 +18,17 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class MageLight extends Block {
+public class BlockMageLight extends Block {
 
 	public final static String name = "mage_light";
 
 	private final AxisAlignedBB bounds;
 
-	public MageLight() {
+	public BlockMageLight() {
 		super(Material.CIRCUITS);
-		this.setCreativeTab(CreativeTabs.DECORATIONS);
 		this.setHardness(0.0F);
 		this.setLightLevel(1F);
 		this.setSoundType(SoundType.GLASS);
-		this.setTranslationKey(WonderfulWands.MODID + "_" + name);
 
 		float f = 0.25F;
 		float min = 0.5F - f;

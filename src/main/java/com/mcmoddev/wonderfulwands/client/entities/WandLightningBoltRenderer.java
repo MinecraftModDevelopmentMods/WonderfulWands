@@ -1,7 +1,7 @@
-package com.mcmoddev.wonderfulwands.client;
+package com.mcmoddev.wonderfulwands.client.entities;
 
 import com.mcmoddev.wonderfulwands.WonderfulWands;
-import com.mcmoddev.wonderfulwands.common.projectiles.EntityWandLightningBolt;
+import com.mcmoddev.wonderfulwands.common.projectiles.EntityBoltLightning;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class WandLightningBoltRenderer extends Render<EntityWandLightningBolt> {
+public class WandLightningBoltRenderer extends Render<EntityBoltLightning> {
 
 	public WandLightningBoltRenderer(RenderManager rm) {
 		super(rm);
@@ -25,7 +25,7 @@ public class WandLightningBoltRenderer extends Render<EntityWandLightningBolt> {
 	/**
 	 * Actually renders the given argument.
 	 */
-	public void doRender(EntityWandLightningBolt entity, double x, double y, double z, float yaw, float partialTick) {
+	public void doRender(EntityBoltLightning entity, double x, double y, double z, float yaw, float partialTick) {
 		this.bindEntityTexture(entity);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		GlStateManager.pushMatrix();
@@ -71,7 +71,7 @@ public class WandLightningBoltRenderer extends Render<EntityWandLightningBolt> {
 	/**
 	 * Returns the location of an entity's texture.
 	 */
-	protected ResourceLocation getEntityTexture(EntityWandLightningBolt e) {
+	protected ResourceLocation getEntityTexture(EntityBoltLightning e) {
 		return texture;
 	}
 

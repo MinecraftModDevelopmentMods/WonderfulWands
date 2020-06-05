@@ -1,18 +1,19 @@
-package com.mcmoddev.wonderfulwands.common.items.wizardrobes;
+package com.mcmoddev.wonderfulwands.client.models;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class TopHatWhiteModel extends ModelBase {
+public class TopHatBlackModel extends ModelBase {
 	final ModelRenderer hat;
 
-	public TopHatWhiteModel() {
+	public TopHatBlackModel() {
 		float offset = 5f;
 		int brimHeight = 1;
 		hat = new ModelRenderer(this, 0, 0);
 		hat.textureWidth = 16;
 		hat.textureHeight = 16;
-		hat.addBox(-4.5f, offset + brimHeight, -4.5f, 9, brimHeight, 9, 0.0f);
+		hat.addBox(-4f, offset + brimHeight, -4f, 8, 9, 8, 0.0f);
+		hat.addBox(-6.5f, offset, -6.5f, 13, brimHeight, 13, 0.0f);
 	}
 
 	public void render(float rotationYangle, float rotationXangle) {

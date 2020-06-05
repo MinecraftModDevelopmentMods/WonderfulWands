@@ -1,6 +1,7 @@
 package com.mcmoddev.wonderfulwands.common.items.wands;
 
 import com.mcmoddev.wonderfulwands.WonderfulWands;
+import com.mcmoddev.wonderfulwands.init.WonderfulBlocks;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -16,19 +17,14 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class WandOfLight extends Wand {
-	public static final String itemName = "wand_light";
 
 	public static int cooldown = 10;
-
 	public static int defaultCharges = 256;
-
 	static final int MAX_RANGE = 64;
 
 	public WandOfLight() {
 		super(defaultCharges);
-		this.setTranslationKey(WonderfulWands.MODID + "_" + itemName);
 	}
-
 
 	@Override
 	public int getBaseRepairCost() {
@@ -48,16 +44,18 @@ public class WandOfLight extends Wand {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer playerEntity, EnumHand hand) {
 		playerEntity.setActiveHand(hand);
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerEntity.getHeldItemMainhand());
+		return new ActionResult<>(EnumActionResult.SUCCESS, playerEntity.getHeldItemMainhand());
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord, EnumFacing blockFace, float par8, float par9, float par10) {
+	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord,
+							 EnumFacing blockFace, float par8, float par9, float par10) {
 		return false;
 	}
 
 	@Override
-	public void onPlayerStoppedUsing(ItemStack srcItemStack, World world, EntityLivingBase playerEntity, int timeRemain) {
+	public void onPlayerStoppedUsing(ItemStack srcItemStack, World world, EntityLivingBase playerEntity,
+									 int timeRemain) {
 		int chargetime = this.getMaxItemUseDuration(srcItemStack) - timeRemain;
 		if (chargetime < 3) return;
 		if (playerEntity instanceof EntityPlayer && !((EntityPlayer) playerEntity).capabilities.isCreativeMode) {
@@ -69,10 +67,10 @@ public class WandOfLight extends Wand {
 		}
 
 		Vec3d vector = playerEntity.getLookVec();
-		Vec3d origin = (new Vec3d(playerEntity.posX, playerEntity.posY + playerEntity.getEyeHeight(), playerEntity.posZ)).add(vector);
+		Vec3d origin = (new Vec3d(playerEntity.posX, playerEntity.posY + playerEntity.getEyeHeight(),
+			playerEntity.posZ)).add(vector);
 
 		boolean success = placeMageLight(world, origin, vector, MAX_RANGE);
-
 		if (success) {
 			playSound(SoundEvents.BLOCK_NOTE_PLING, world, playerEntity);
 			if (playerEntity instanceof EntityPlayer && !((EntityPlayer) playerEntity).capabilities.isCreativeMode) {
@@ -92,7 +90,8 @@ public class WandOfLight extends Wand {
 				if (w.isAirBlock(nextBlock)) {
 					// keep moving
 					w.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, pos.x, pos.y, pos.z,
-						(w.rand.nextFloat() - 0.5f) * 0.2f, (w.rand.nextFloat() - 0.5f) * 0.2f, (w.rand.nextFloat() - 0.5f) * 0.2f,
+						(w.rand.nextFloat() - 0.5f) * 0.2f, (w.rand.nextFloat() - 0.5f) * 0.2f,
+						(w.rand.nextFloat() - 0.5f) * 0.2f,
 						new int[0]);
 					pos = next;
 					block = nextBlock;
@@ -110,11 +109,10 @@ public class WandOfLight extends Wand {
 				}
 			}
 			if (!w.isRemote) {
-				w.setBlockState(block, WonderfulWands.mageLight.getDefaultState());
+				w.setBlockState(block, WonderfulBlocks.MAGE_LIGHT.getDefaultState());
 			}
 			return true;
 		}
 		return false;
 	}
-
 }

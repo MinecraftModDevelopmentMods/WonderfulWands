@@ -1,6 +1,5 @@
 package com.mcmoddev.wonderfulwands.common.items.wands;
 
-import com.mcmoddev.wonderfulwands.WonderfulWands;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -19,19 +18,14 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class WandOfWebbing extends Wand {
-	public static final String itemName = "wand_webbing";
 
 	public static int cooldown = 10;
-
 	public static int defaultCharges = 64;
-
 	static final int MAX_RANGE = 64;
 
 	public WandOfWebbing() {
 		super(defaultCharges);
-		this.setTranslationKey(WonderfulWands.MODID + "_" + itemName);
 	}
-
 
 	@Override
 	public int getBaseRepairCost() {
@@ -60,7 +54,8 @@ public class WandOfWebbing extends Wand {
 	}
 
 	@Override
-	public void onPlayerStoppedUsing(ItemStack srcItemStack, World world, EntityLivingBase playerEntity, int timeRemain) {
+	public void onPlayerStoppedUsing(ItemStack srcItemStack, World world, EntityLivingBase playerEntity,
+									 int timeRemain) {
 		int chargetime = this.getMaxItemUseDuration(srcItemStack) - timeRemain;
 		if (chargetime < 3) return;
 		if (playerEntity instanceof EntityPlayer && !((EntityPlayer) playerEntity).capabilities.isCreativeMode) {
@@ -72,8 +67,8 @@ public class WandOfWebbing extends Wand {
 		}
 
 		Vec3d vector = playerEntity.getLookVec();
-		Vec3d origin = (new Vec3d(playerEntity.posX, playerEntity.posY + playerEntity.getEyeHeight(), playerEntity.posZ)).add(vector);
-
+		Vec3d origin = (new Vec3d(playerEntity.posX, playerEntity.posY + playerEntity.getEyeHeight(),
+			playerEntity.posZ)).add(vector);
 		boolean success = placeSpiderWeb(world, origin, vector, MAX_RANGE);
 
 		if (success) {
@@ -82,7 +77,6 @@ public class WandOfWebbing extends Wand {
 				srcItemStack.damageItem(1, playerEntity);
 			}
 		}
-
 	}
 
 	private boolean placeSpiderWeb(World w, Vec3d start, Vec3d velocity, int rangeLimit) {
@@ -95,7 +89,8 @@ public class WandOfWebbing extends Wand {
 				if (w.isAirBlock(nextBlock)) {
 					// keep moving
 					w.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, pos.x, pos.y, pos.z,
-						(w.rand.nextFloat() - 0.5f) * 0.2f, (w.rand.nextFloat() - 0.5f) * 0.2f, (w.rand.nextFloat() - 0.5f) * 0.2f,
+						(w.rand.nextFloat() - 0.5f) * 0.2f, (w.rand.nextFloat() - 0.5f) * 0.2f,
+						(w.rand.nextFloat() - 0.5f) * 0.2f,
 						new int[0]);
 					pos = next;
 					block = nextBlock;
@@ -130,5 +125,4 @@ public class WandOfWebbing extends Wand {
 		}
 		return false;
 	}
-
 }

@@ -1,4 +1,4 @@
-package com.mcmoddev.wonderfulwands.client;
+package com.mcmoddev.wonderfulwands.client.entities;
 
 import com.mcmoddev.wonderfulwands.WonderfulWands;
 import net.minecraft.client.renderer.entity.RenderArrow;

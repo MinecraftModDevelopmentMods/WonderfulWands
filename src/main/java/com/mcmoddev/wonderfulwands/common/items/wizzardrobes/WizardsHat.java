@@ -1,11 +1,14 @@
-package com.mcmoddev.wonderfulwands.common.items.wizardrobes;
+package com.mcmoddev.wonderfulwands.common.items.wizzardrobes;
 
-import com.mcmoddev.wonderfulwands.ClientProxy;
 import com.mcmoddev.wonderfulwands.WonderfulWands;
+import com.mcmoddev.wonderfulwands.client.WizardHatRenderer;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
@@ -15,6 +18,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.List;
 
@@ -25,21 +29,14 @@ import java.util.List;
  *
  * @author cybergnome
  */
-public class WizardsHat extends net.minecraft.item.ItemArmor {
-
+public class WizardsHat extends ItemArmor {
 
 	public static final int potionApplyInterval = 19;
 	public static final int potionDuration = 11 * 20;
 
-
-	public final String itemName = "hat_wizard";
-
-	//private final WizardHatRenderer renderer;
-
 	public WizardsHat() {
 		super(WonderfulWands.NONARMOR, 0, EntityEquipmentSlot.HEAD);
-		this.setTranslationKey(WonderfulWands.MODID + "_" + itemName);
-		this.setCreativeTab(WonderfulWands.robesTab);
+		this.setCreativeTab(WonderfulWands.TAB_ROBES);
 		// set values
 		this.setMaxDamage(1);
 		this.setHasSubtypes(true);
@@ -71,7 +68,6 @@ public class WizardsHat extends net.minecraft.item.ItemArmor {
 		}
 	}
 
-
 	public void setPotionEffectLevel(ItemStack src, int level) {
 		NBTTagCompound tag;
 		if (src.hasTagCompound() == false) {
@@ -95,8 +91,8 @@ public class WizardsHat extends net.minecraft.item.ItemArmor {
 
 
 	@SideOnly(Side.CLIENT)
-	public net.minecraft.client.model.ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, net.minecraft.client.model.ModelBiped biped) {
-		return ClientProxy.wizardHatRenderer;
+	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped biped) {
+		return new WizardHatRenderer();
 	}
 
 	@Override
@@ -130,7 +126,9 @@ public class WizardsHat extends net.minecraft.item.ItemArmor {
 				}
 			} else {
 				Potion pot = Potion.getPotionFromResourceLocation(this.getPotionEffectID(src));
-				if (pot == null) return;
+				if (pot == null) {
+					return;
+				}
 				int level = this.getPotionEffectLevel(src);
 				player.addPotionEffect(new PotionEffect(pot, potionDuration, level, false, false));
 			}
@@ -139,11 +137,11 @@ public class WizardsHat extends net.minecraft.item.ItemArmor {
 
 
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean b) {
-		super.addInformation(stack, player, list, b);
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		super.addInformation(stack, worldIn, tooltip, flagIn);
 		String potionID = this.getPotionEffectID(stack);
 		if (potionID != null && Potion.getPotionFromResourceLocation(potionID) != null) {
-			list.add(I18n.translateToLocal(Potion.getPotionFromResourceLocation(potionID).getName()));
+			tooltip.add(I18n.translateToLocal(Potion.getPotionFromResourceLocation(potionID).getName()));
 		}
 	}
 

@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityWandLightningBolt extends Entity {
+public class EntityBoltLightning extends Entity {
 
 	int life = 0;
 	final int lifeSpan = 13;
@@ -18,7 +18,7 @@ public class EntityWandLightningBolt extends Entity {
 
 	public double length = 1;
 
-	public EntityWandLightningBolt(World w) {
+	public EntityBoltLightning(World w) {
 		super(w);
 		this.posX = 0;
 		this.posY = 0;
@@ -27,7 +27,8 @@ public class EntityWandLightningBolt extends Entity {
 		this.rotationYaw = 0;
 	}
 
-	public EntityWandLightningBolt(World w, EntityLivingBase owner, double x, double y, double z, float yaw, float pitch, double length) {
+	public EntityBoltLightning(World w, EntityLivingBase owner, double x, double y, double z, float yaw, float pitch,
+							   double length) {
 		super(w);
 		this.posX = x;
 		this.posY = y;
@@ -79,8 +80,7 @@ public class EntityWandLightningBolt extends Entity {
 		tag.setShort("yTile", (short) this.tileY);
 		tag.setShort("zTile", (short) this.tileZ);
 		tag.setByte("len", (byte) (this.length * 100f));
-		tag.setTag("direction", this.newFloatNBTList(new float[]{(float) this.motionX, (float) this.motionY, (float) this.motionZ}));
-
+		tag.setTag("direction", this.newFloatNBTList((float) this.motionX, (float) this.motionY, (float) this.motionZ));
 	}
 
 	/**
@@ -93,5 +93,4 @@ public class EntityWandLightningBolt extends Entity {
 		this.setPosition(x, y, z);
 		this.setRotation(yaw, pitch);
 	}
-
 }

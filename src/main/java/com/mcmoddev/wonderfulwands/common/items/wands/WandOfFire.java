@@ -39,7 +39,7 @@ public class WandOfFire extends Wand {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer playerEntity, EnumHand hand) {
 		playerEntity.setActiveHand(hand);
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerEntity.getHeldItemMainhand());
+		return new ActionResult<>(EnumActionResult.SUCCESS, playerEntity.getHeldItemMainhand());
 	}
 
 	/**
@@ -48,7 +48,8 @@ public class WandOfFire extends Wand {
 	 * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
 	 */
 	@Override
-	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord, EnumFacing blockFace, float par8, float par9, float par10) {
+	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord,
+							 EnumFacing blockFace, float par8, float par9, float par10) {
 		return false;
 	}
 
@@ -57,7 +58,8 @@ public class WandOfFire extends Wand {
 	 * Invoked when the player releases the right-click button
 	 */
 	@Override
-	public void onPlayerStoppedUsing(ItemStack srcItemStack, World world, EntityLivingBase playerEntity, int timeRemain) {
+	public void onPlayerStoppedUsing(ItemStack srcItemStack, World world, EntityLivingBase playerEntity,
+									 int timeRemain) {
 		super.onPlayerStoppedUsing(srcItemStack, world, playerEntity, timeRemain);
 	}
 
@@ -80,13 +82,16 @@ public class WandOfFire extends Wand {
 		playSound(SoundEvents.ENTITY_FIREWORK_LAUNCH, world, playerEntity);
 
 		if (!world.isRemote) {
-			double vecX = (double) (-MathHelper.sin(playerEntity.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(playerEntity.rotationPitch / 180.0F * (float) Math.PI));
+			double vecX = (double) (-MathHelper.sin(playerEntity.rotationYaw / 180.0F * (float) Math.PI)
+				* MathHelper.cos(playerEntity.rotationPitch / 180.0F * (float) Math.PI));
 			double vecY = (double) (-MathHelper.sin(playerEntity.rotationPitch / 180.0F * (float) Math.PI));
-			double vecZ = (double) (MathHelper.cos(playerEntity.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(playerEntity.rotationPitch / 180.0F * (float) Math.PI));
+			double vecZ = (double) (MathHelper.cos(playerEntity.rotationYaw / 180.0F * (float) Math.PI)
+				* MathHelper.cos(playerEntity.rotationPitch / 180.0F * (float) Math.PI));
 
 			double deltaX = (double) (-MathHelper.sin(playerEntity.rotationYaw / 180.0F * (float) Math.PI));
 			double deltaZ = (double) (MathHelper.cos(playerEntity.rotationYaw / 180.0F * (float) Math.PI));
-			Fireball fireball = new Fireball(world, playerEntity, playerEntity.posX + deltaX, playerEntity.posY + 1, playerEntity.posZ + deltaZ, vecX, vecY, vecZ);
+			Fireball fireball = new Fireball(world, playerEntity, playerEntity.posX + deltaX,
+				playerEntity.posY + 1, playerEntity.posZ + deltaZ, vecX, vecY, vecZ);
 			world.spawnEntity(fireball);
 		}
 		return srcItemStack;

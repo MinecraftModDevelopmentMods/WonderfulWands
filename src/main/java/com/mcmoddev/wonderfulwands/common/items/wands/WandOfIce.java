@@ -1,6 +1,5 @@
 package com.mcmoddev.wonderfulwands.common.items.wands;
 
-import com.mcmoddev.wonderfulwands.WonderfulWands;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.state.IBlockState;
@@ -13,17 +12,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class WandOfIce extends Wand {
-	public static final String itemName = "wand_ice";
 
 	public static int cooldown = 10;
-
 	public static int defaultCharges = 256;
 
 	public WandOfIce() {
 		super(defaultCharges);
-		this.setTranslationKey(WonderfulWands.MODID + "_" + itemName);
 	}
-
 
 	@Override
 	public int getBaseRepairCost() {
@@ -31,7 +26,8 @@ public class WandOfIce extends Wand {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord, EnumFacing blockFace, float par8, float par9, float par10) {
+	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord,
+							 EnumFacing blockFace, float par8, float par9, float par10) {
 		int targetX = coord.getX(), targetY = coord.getY(), targetZ = coord.getZ();
 		if (!playerEntity.capabilities.isCreativeMode) {
 			if (isOutOfCharge(srcItemStack)) {
@@ -78,7 +74,7 @@ public class WandOfIce extends Wand {
 		} else if (target == Blocks.SNOW_LAYER) {
 			if (((Integer) bs.getValue(BlockSnow.LAYERS)) < 8) {
 				w.setBlockState(coord, Blocks.SNOW_LAYER.getDefaultState()
-					.withProperty(BlockSnow.LAYERS, (((Integer) bs.getValue(BlockSnow.LAYERS)) + 1)));
+					.withProperty(BlockSnow.LAYERS, (bs.getValue(BlockSnow.LAYERS) + 1)));
 			} else {
 				w.setBlockState(coord, Blocks.SNOW.getDefaultState());
 			}
@@ -88,5 +84,4 @@ public class WandOfIce extends Wand {
 		}
 		return 0;
 	}
-
 }
