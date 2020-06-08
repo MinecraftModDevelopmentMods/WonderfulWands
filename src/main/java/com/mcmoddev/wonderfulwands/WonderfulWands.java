@@ -27,8 +27,7 @@ import org.apache.logging.log4j.Logger;
 )
 public class WonderfulWands {
 
-	//TODO Client models, blockstates, lang files and textures are not working yet.
-	//TODO Recipes and config stuff need to be added.
+	//TODO Recipes need to be added.
 	//TODO Robes, and ilusion blocks need adding back in.
 	//TODO EVERYTHING needs cleaning up... Code is such a mess...
 	//TODO Find and catch the bugs. First one linked below. Line 62. (Hold right click the wand in game for the crash)
@@ -95,6 +94,7 @@ public class WonderfulWands {
 }
 
 
+
 	/**
 	 * Below this line is all the old code from 1.11.2. It is to be cleaned up/removed, do not enable it.
 
@@ -103,7 +103,7 @@ public class WonderfulWands {
 
 
 
-	public static boolean altRecipes = false;
+
 
 	public static WizardingArmor[][] robes = new WizardingArmor[16][4]; // [color][slot]
 
@@ -116,12 +116,6 @@ public class WonderfulWands {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
-		config.load();
-
-		altRecipes = config.getBoolean("alternative_recipes", "options", false,
-			"If true, then robes and wands will use different recipes than normal");
-
 		mageLight = new MageLight();
 		registerBlock(mageLight, MageLight.name);
 		IllusoryBlock illusion;
@@ -253,7 +247,6 @@ public class WonderfulWands {
 		GameRegistry.addRecipe(new ItemStack(topHat, 1), " b ", " l ", 'b', new ItemStack(Blocks.WOOL, 1, 15), 'l', Items.LEATHER);
 
 		//	OreDictionary.initVanillaEntries()
-		config.save();
 	}
 
 	private static void addWandRecipe(Wand output, Item specialItem) {
