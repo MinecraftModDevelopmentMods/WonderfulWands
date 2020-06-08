@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class WizardHatRenderer extends ModelBiped /*implements IItemRenderer*/ {
 
 	WizardHatModel hatModel;
-	public ResourceLocation hatTexture = new ResourceLocation(WonderfulWands.MODID + ":textures/blueNstars.png");
+	public ResourceLocation hatTexture = new ResourceLocation(WonderfulWands.MODID + ":textures/bluenstars.png");
 
 	public WizardHatRenderer() {
 		hatModel = new WizardHatModel();

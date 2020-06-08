@@ -1,30 +1,29 @@
+item.wonderfulwands.wand_generic.name=Nonmagical Wand
+item.wonderfulwands.wand_of_death.name=Wand of Death
+item.wonderfulwands.wand_of_fire.name=Wand of Fire
+item.wonderfulwands.wand_of_growth.name=Wand of Growth
+item.wonderfulwands.wand_of_harvesting.name=Wand of Harvesting
+item.wonderfulwands.wand_of_healing.name=Wand of Healing
+item.wonderfulwands.wand_of_ice.name=Wand of Freezing
+item.wonderfulwands.wand_of_light.name=Wand of Light
+item.wonderfulwands.wand_of_lightning.name=Wand of Lightning
+item.wonderfulwands.wand_of_storm.name=Wand of Storms
+item.wonderfulwands.wand_of_mining.name=Wand of Mining
+item.wonderfulwands.wand_of_missiles.name=Wand of Magic Missiles
+item.wonderfulwands.wand_of_teleportation.name=Wand of Teleportation
+item.wonderfulwands.wand_of_bridge.name=Wand of Bridging
+item.wonderfulwands.wand_of_climb.name=Wand of Climbing
+item.wonderfulwands.wand_of_greater_light.name=Wand of Darkness Bane
+item.wonderfulwands.wand_of_illusion.name=Wand of Illusions
+item.wonderfulwands.wand_of_levitation.name=Wand of Levitation
+item.wonderfulwands.wand_of_tunneling.name=Wand of Tunneling
+item.wonderfulwands.wand_of_webbing.name=Wand of Webbing
+item.wonderfulwands.wand_of_rails.name=Wand of Railroads
 
-item.wonderfulwands_wand_ordinary.name=Nonmagical Wand
-item.wonderfulwands_wand_death.name=Wand of Death
-item.wonderfulwands_wand_fire.name=Wand of Fire
-item.wonderfulwands_wand_growth.name=Wand of Growth
-item.wonderfulwands_wand_harvesting.name=Wand of Harvesting
-item.wonderfulwands_wand_healing.name=Wand of Healing
-item.wonderfulwands_wand_ice.name=Wand of Freezing
-item.wonderfulwands_wand_light.name=Wand of Light
-item.wonderfulwands_wand_lightning.name=Wand of Lightning
-item.wonderfulwands_wand_storm.name=Wand of Storms
-item.wonderfulwands_wand_mining.name=Wand of Mining
-item.wonderfulwands_wand_missiles.name=Wand of Magic Missiles
-item.wonderfulwands_wand_teleportation.name=Wand of Teleportation
-item.wonderfulwands_wand_bridge.name=Wand of Bridging
-item.wonderfulwands_wand_climb.name=Wand of Climbing
-item.wonderfulwands_wand_greater_light.name=Wand of Darkness Bane
-item.wonderfulwands_wand_illusion.name=Wand of Illusions
 
-item.wonderfulwands_wand_levitation.name=Wand of Levitation
-item.wonderfulwands_wand_tunneling.name=Wand of Tunneling
-item.wonderfulwands_wand_webbing.name=Wand of Webbing
-item.wonderfulwands_wand_rails.name=Wand of Railroads
-
-item.wonderfulwands_hat_wizard.name=Wizard's Hat
-item.wonderfulwands_hat_witch.name=Witch's Hat
-item.wonderfulwands_tophat.name=Top Hat
+item.wonderfulwands_wizards_hat.name=Wizard's Hat
+item.wonderfulwands_witches_hat.name=Witch's Hat
+item.wonderfulwands_top_hat.name=Top Hat
 
 item.wonderfulwands_robes_black_helmet.name=Black Wizard Hood
 item.wonderfulwands_robes_black_chestplate.name=Black Wizard Robe
@@ -106,12 +105,12 @@ item.wonderfulwands_robes_white_chestplate.name=White Wizard Robe
 item.wonderfulwands_robes_white_leggings.name=White Wizard Leggings
 item.wonderfulwands_robes_white_boots.name=White Wizard Slippers
 
-tile.wonderfulwands_mage_light.name=Mage Light
+entity.wonderfulwands.magic_missile.name=Magical Missile
 
-entity.wonderfulwands_magic_missile.name=Magical Missile
+itemGroup.tab.wonderfulwands.armor=Wizarding Robes
+itemGroup.tab.wonderfulwands.wands=Wonderful Wands
+itemGroup.tab.wonderfulwands.blocks=Wonderful Blocks
 
-itemGroup.wonderfulwands.armor=Wizarding Robes
-itemGroup.wonderfulwands.wands=Wonderful Wands
-
-tile.feyrail.name=Faerie Rails
-tile.powered_feyrail.name=Powered Faerie Rails
+tile.wonderfulwands.mage_light.name=Mage Light
+tile.wonderfulwands.fey_rail.name=Faerie Rails
+tile.wonderfulwands.fey_rail_powered.name=Powered Faerie Rails

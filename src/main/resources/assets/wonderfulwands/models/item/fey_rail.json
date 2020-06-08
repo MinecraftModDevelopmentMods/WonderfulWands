@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "wonderfulwands:blocks/feyrail_normal"
+        "layer0": "wonderfulwands:blocks/fey_rail_normal"
     }
 }

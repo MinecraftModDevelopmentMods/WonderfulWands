@@ -1,8 +1,8 @@
 {
     "ambientocclusion": false,
     "textures": {
-        "rail": "wonderfulwands:blocks/feyrail_normal",
-        "particle": "wonderfulwands:blocks/feyrail_normal"
+        "rail": "wonderfulwands:blocks/fey_rail_normal_turned",
+        "particle": "wonderfulwands:blocks/fey_rail_normal"
     },
     "elements": [
         {   "from": [ 0, 1, 0 ],

@@ -1,6 +1,6 @@
 {
     "parent": "block/rail_raised_sw",
     "textures": {
-        "rail": "wonderfulwands:blocks/feyrail_unpowered"
+        "rail": "wonderfulwands:blocks/fey_rail_powered"
     }
 }
