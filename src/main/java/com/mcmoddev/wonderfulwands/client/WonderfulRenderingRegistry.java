@@ -5,6 +5,7 @@ import com.mcmoddev.wonderfulwands.client.entities.LightWispRenderer;
 import com.mcmoddev.wonderfulwands.client.entities.MagicMissileRenderer;
 import com.mcmoddev.wonderfulwands.client.entities.WandLightningBoltRenderer;
 import com.mcmoddev.wonderfulwands.common.entities.EntityLightWisp;
+import com.mcmoddev.wonderfulwands.common.items.wizzardrobes.WizardingArmor;
 import com.mcmoddev.wonderfulwands.common.projectiles.EntityBoltLightning;
 import com.mcmoddev.wonderfulwands.common.projectiles.EntityMagicMissile;
 import com.mcmoddev.wonderfulwands.init.WonderfulBlocks;
@@ -61,6 +62,23 @@ public class WonderfulRenderingRegistry {
 		new TopHatRenderer();
 		new WitchHatRenderer();
 		new WizardHatRenderer();
+
+		registerArmorRenders();
+	}
+
+	private static void registerArmorRenders() {
+		for (int color = 0; color < WizardingArmor.robes.length; color++) {
+			for (int slot = 0; slot < WizardingArmor.robes[0].length; slot++) {
+				initModel(WizardingArmor.robes[color][slot], WonderfulWands.MODID + ":robes_"
+					+ WizardingArmor.colorSuffixes[color] + "_"
+					+ WizardingArmor.slotName.get(WizardingArmor.armorSlots[slot]));
+			}
+		}
+	}
+
+	private static void initModel(Item item, String itemName) {
+		ModelLoader.setCustomModelResourceLocation(item, 0,
+			new ModelResourceLocation(itemName, "inventory"));
 	}
 
 	private static void initModel(final Item item) {

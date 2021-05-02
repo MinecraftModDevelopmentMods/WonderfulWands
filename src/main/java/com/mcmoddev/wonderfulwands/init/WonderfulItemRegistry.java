@@ -23,9 +23,12 @@ import com.mcmoddev.wonderfulwands.common.items.wands.WandOfTunneling;
 import com.mcmoddev.wonderfulwands.common.items.wands.WandOfWebbing;
 import com.mcmoddev.wonderfulwands.common.items.wizzardrobes.TopHat;
 import com.mcmoddev.wonderfulwands.common.items.wizzardrobes.WitchesHat;
+import com.mcmoddev.wonderfulwands.common.items.wizzardrobes.WizardingArmor;
 import com.mcmoddev.wonderfulwands.common.items.wizzardrobes.WizardsHat;
 import net.minecraft.block.Block;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -58,22 +61,30 @@ public class WonderfulItemRegistry {
 			nameWand(new WandOfRails(), "wand_of_rails"),
 			nameWand(new WandOfWebbing(), "wand_of_webbing"),
 			nameWand(new WandOfLevitation(), "wand_of_levitation"),
-			nameWand(new WandOfTunneling(), "wand_of_tunneling")
-		);
+			nameWand(new WandOfTunneling(), "wand_of_tunneling"),
 
-		event.getRegistry().registerAll(
 			nameItem(new TopHat(), "top_hat"),
 			nameItem(new WitchesHat(), "witches_hat"),
-			nameItem(new WizardsHat(), "wizards_hat")
-		);
+			nameItem(new WizardsHat(), "wizards_hat"),
 
-		//TODO See if we should keep the items for creative tabs or not as they don't exist and can't be placed without
-		// the wands in previous versions
-		event.getRegistry().registerAll(
 			nameBlockItem(WonderfulBlocks.FEY_RAIL),
 			nameBlockItem(WonderfulBlocks.FEY_RAIL_POWERED),
 			nameBlockItem(WonderfulBlocks.MAGE_LIGHT)
 		);
+
+		for (int colorIndex = 0; colorIndex < 16; colorIndex++) {
+			int slotIndex = 0;
+			for (int i = 0; i < 4; i++) {
+				EntityEquipmentSlot armorSlot = WizardingArmor.armorSlots[slotIndex];
+				String color = WizardingArmor.colorSuffixes[colorIndex];
+				WizardingArmor robe = new WizardingArmor(WizardingArmor.WIZARD_ROBES, color, armorSlot);
+				event.getRegistry().registerAll(
+					registerRobes(robe, "robes_" + color + "_" + WizardingArmor.slotName.get(armorSlot))
+				);
+				WizardingArmor.robes[colorIndex][slotIndex] = robe;
+				slotIndex++;
+			}
+		}
 	}
 
 	private static Item nameItem(Item item, String name) {
@@ -96,6 +107,14 @@ public class WonderfulItemRegistry {
 		ItemBlock item = new ItemBlock(block);
 		ResourceLocation name = block.getRegistryName();
 		item.setRegistryName(name);
+		return item;
+	}
+
+	private static ItemArmor registerRobes(WizardingArmor item, String name) {
+		item
+			.setRegistryName(name)
+			.setTranslationKey(WonderfulWands.MODID + "." + name)
+			.setCreativeTab(WonderfulWands.TAB_ROBES);
 		return item;
 	}
 }

@@ -35,7 +35,7 @@ public class WizardsHat extends ItemArmor {
 	public static final int potionDuration = 11 * 20;
 
 	public WizardsHat() {
-		super(WonderfulWands.NONARMOR, 0, EntityEquipmentSlot.HEAD);
+		super(WonderfulWands.NON_ARMOR, 0, EntityEquipmentSlot.HEAD);
 		this.setCreativeTab(WonderfulWands.TAB_ROBES);
 		// set values
 		this.setMaxDamage(1);

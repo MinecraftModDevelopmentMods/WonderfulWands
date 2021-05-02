@@ -28,10 +28,12 @@ import org.apache.logging.log4j.Logger;
 public class WonderfulWands {
 
 	//TODO Recipes need to be added.
-	//TODO Robes, and ilusion blocks need adding back in.
-	//TODO EVERYTHING needs cleaning up... Code is such a mess...
+	//TODO illusion blocks need adding back in.
 	//TODO Find and catch the bugs. First one linked below. Line 62. (Hold right click the wand in game for the crash)
-	/**{@link com.mcmoddev.wonderfulwands.common.entities.EntityLightWisp#writeToNBT(NBTTagCompound)}*/
+	/**
+	 * {@link com.mcmoddev.wonderfulwands.common.entities.EntityLightWisp#writeToNBT(NBTTagCompound)}
+	 */
+	//TODO The second bug I know of is the wand of rails, it always places rails down... I'm not sure this is intended.
 
 	public static final String MODID = "wonderfulwands";
 	public static final String NAME = "Wonderful Wands";
@@ -62,7 +64,6 @@ public class WonderfulWands {
 		}
 	};
 
-	//TODO If we remove the blocks as items we can place from creative, remove this.
 	public static final CreativeTabs TAB_BLOCKS = new CreativeTabs("tab." + MODID + ".blocks") {
 		@Override
 		public ItemStack createIcon() {
@@ -70,12 +71,9 @@ public class WonderfulWands {
 		}
 	};
 
-	public static ItemArmor.ArmorMaterial NONARMOR = EnumHelper.addArmorMaterial("NONARMOR",
+	public static ItemArmor.ArmorMaterial NON_ARMOR = EnumHelper.addArmorMaterial("NONARMOR",
 		"empty_armor", 10, new int[]{0, 0, 0, 0},
 		0, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0);
-	public static ItemArmor.ArmorMaterial WIZARDROBES = EnumHelper.addArmorMaterial("WIZARDCLOTH",
-		"wizard_robes", 15, new int[]{1, 1, 1, 1},
-		40, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0);
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -95,29 +93,10 @@ public class WonderfulWands {
 
 
 
-	/**
-	 * Below this line is all the old code from 1.11.2. It is to be cleaned up/removed, do not enable it.
-
-
-
-
-
-
-
-
-	public static WizardingArmor[][] robes = new WizardingArmor[16][4]; // [color][slot]
-
-	private static final String[] colorSuffixes = {"black", "red", "green", "brown", "blue", "purple", "cyan",
-		"silver", "gray", "pink", "lime", "yellow", "light_blue", "magenta", "orange", "white"};
-	private static final String[] oreDictionaryColors = {"dyeBlack", "dyeRed", "dyeGreen", "dyeBrown", "dyeBlue", "dyePurple", "dyeCyan",
-		"dyeLightGray", "dyeGray", "dyePink", "dyeLime", "dyeYellow", "dyeLightBlue", "dyeMagenta", "dyeOrange", "dyeWhite"};
-
-	private final EntityEquipmentSlot[] armorSlots = {EntityEquipmentSlot.HEAD, EntityEquipmentSlot.CHEST, EntityEquipmentSlot.LEGS, EntityEquipmentSlot.FEET};
+	/* Below this line is all the old code from 1.11.2. It is to be cleaned up/removed, do not enable it.
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		mageLight = new MageLight();
-		registerBlock(mageLight, MageLight.name);
 		IllusoryBlock illusion;
 		illusion = new IllusoryBlock(Blocks.DIRT);
 		registerBlock(illusion, illusion.name);
@@ -156,7 +135,6 @@ public class WonderfulWands {
 		registerBlock(illusion, illusion.name);
 
 		// recipes
-
 		// Nonmagical
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(wandGeneric), " g ", " s ", " g ", 'g', "nuggetGold", 's', "stickWood"));
 		// Magic Missile
@@ -201,52 +179,6 @@ public class WonderfulWands {
 		addWandRecipe(wandOfLevitation, Items.FEATHER);
 		// wand of tunneling
 		addWandRecipe(wandOfTunneling, Items.DIAMOND_PICKAXE);
-
-		for (int colorIndex = 0; colorIndex < 16; colorIndex++) {
-			int slotIndex = 0;
-			for (int i = 0; i < 4; i++) {
-				EntityEquipmentSlot armorSlot = armorSlots[slotIndex];
-				String color = colorSuffixes[colorIndex];
-				WizardingArmor r = new WizardingArmor(WIZARDROBES, color, armorSlot);
-				registerItem(r, "robes_" + color + "_" + WizardingArmor.slotName.get(armorSlot));
-				OreDictionary.registerOre(WizardingArmor.slotName.get(armorSlot) + "WizardRobes", r);
-				OreDictionary.registerOre("wizardRobes", r);
-				GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(r, 1), WizardingArmor.slotName.get(armorSlot) + "WizardRobes", oreDictionaryColors[colorIndex]));
-				robes[colorIndex][slotIndex] = r;
-				slotIndex++;
-			}
-			ItemStack cloth = new ItemStack(Blocks.WOOL, 1, 15 - colorIndex);
-			// metadata for wool: white, orange, magenta, lightblue, yellow lime green, pink, gray, light gray, cyan, purple, blue, brown, green, red, black
-			if (altRecipes) {
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(robes[colorIndex][0], 1), "ccc", "cgc", 'c', cloth, 'g', "ingotGold"));
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(robes[colorIndex][1], 1), "cgc", "ccc", "ccc", 'c', cloth, 'g', "ingotGold"));
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(robes[colorIndex][2], 1), "ggg", "c c", "c c", 'c', cloth, 'g', "ingotGold"));
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(robes[colorIndex][3], 1), "c c", "g g", 'c', cloth, 'g', "ingotGold"));
-			} else {
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(robes[colorIndex][0], 1), "ccc", "c c", 'c', cloth));
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(robes[colorIndex][1], 1), "c c", "ccc", "ccc", 'c', cloth));
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(robes[colorIndex][2], 1), "ccc", "c c", "c c", 'c', cloth));
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(robes[colorIndex][3], 1), "c c", "c c", 'c', cloth));
-			}
-		}
-
-		if (config.getBoolean("allow_wizard_hat", "options", true,
-			"If true, then the Wizard's Hat and Witch's Hat items will be craftable (if \n" +
-				"false, the hats will not be craftable). These hats are very powerful and you \n" +
-				"may want to disable them if you expect there to be troublemakers (aka \n" +
-				"\"griefers\")")) {
-			if (altRecipes) {
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(wizardHat, 1), " d ", " b ", "bbb", 'b', new ItemStack(Blocks.WOOL, 1, 11), 'd', Blocks.SKULL));
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(witchHat, 1), " d ", " b ", "bbb", 'b', new ItemStack(Blocks.WOOL, 1, 15), 'd', Blocks.SKULL));
-			} else {
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(wizardHat, 1), " d ", " b ", "bbb", 'b', new ItemStack(Blocks.WOOL, 1, 11), 'd', Items.GHAST_TEAR));
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(witchHat, 1), " d ", " b ", "bbb", 'b', new ItemStack(Blocks.WOOL, 1, 15), 'd', Items.GHAST_TEAR));
-			}
-
-		}
-		GameRegistry.addRecipe(new ItemStack(topHat, 1), " b ", " l ", 'b', new ItemStack(Blocks.WOOL, 1, 15), 'l', Items.LEATHER);
-
-		//	OreDictionary.initVanillaEntries()
 	}
 
 	private static void addWandRecipe(Wand output, Item specialItem) {
@@ -290,12 +222,6 @@ public class WonderfulWands {
 	}
 
 	private void registerItemRenders() {
-		for (int color = 0; color < robes.length; color++) {
-			for (int slot = 0; slot < robes[0].length; slot++) {
-				registerItemRender(robes[color][slot], "robes_" + colorSuffixes[color] + "_" + WizardingArmor.slotName.get(armorSlots[slot]));
-			}
-		}
-
 		for (Map.Entry<Block, IllusoryBlock> entry : IllusoryBlock.getLookUpTable().entrySet()) {
 			IllusoryBlock b = entry.getValue();
 			Block r = entry.getKey();
@@ -303,77 +229,11 @@ public class WonderfulWands {
 				.register(net.minecraft.item.Item.getItemFromBlock(b), 0,
 					new ModelResourceLocation(r.getRegistryName(), "inventory"));
 		}
+
 		IllusoryBlock pb = IllusoryBlock.getLookUpTable().get(Blocks.PLANKS);
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
 			.register(net.minecraft.item.Item.getItemFromBlock(pb), 0,
 				new ModelResourceLocation(MODID + ":" + pb.name, "inventory"));
-	}
-
-	private void registerItemRender(Item i, String itemName) {
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(i, 0, new ModelResourceLocation(MODID + ":" + itemName, "inventory"));
-	}
-
-	public static String objectDump(Object o) throws IllegalArgumentException, IllegalAccessException {
-		if (o == null) {
-			return "null object";
-		}
-		if (o.getClass() == null) {
-			return "null class";
-		}
-		StringBuilder sb = new StringBuilder();
-		Class<?> c = o.getClass();
-		sb.append(c.getName()).append("\n");
-		do {
-			Field[] fields = c.getDeclaredFields();
-			for (Field f : fields) {
-				f.setAccessible(true);
-				sb.append("\t").append(f.getName()).append("=");
-				if (f.getType().isArray()) {
-					sb.append(arrayDump(f.get(o)));
-				} else if (f.get(o) instanceof java.util.Map) {
-					sb.append(mapDump((java.util.Map) f.get(o)));
-				} else {
-					sb.append(String.valueOf(f.get(o)));
-				}
-				sb.append("\n");
-			}
-			c = c.getSuperclass();
-		} while (c != null);
-		return sb.toString();
-	}
-
-	public static String mapDump(java.util.Map map) {
-		StringBuilder sb = new StringBuilder();
-		for (Object key : map.keySet()) {
-			sb.append(String.valueOf(key)).append("->");
-			if (map.get(key).getClass().isArray()) {
-				sb.append(arrayDump(map.get(key)));
-			} else {
-				sb.append(String.valueOf(map.get(key)));
-			}
-			sb.append("\n");
-		}
-		return sb.toString();
-	}
-
-	public static String arrayDump(Object array) {
-		StringBuilder sb = new StringBuilder();
-		int size = Array.getLength(array);
-		sb.append("[ ");
-		boolean addComma = false;
-		for (int i = 0; i < size; i++) {
-			if (addComma) sb.append(", ");
-			if (Array.get(array, i).getClass().isArray()) {
-				sb.append(arrayDump(Array.get(array, i)));
-			} else if (Array.get(array, i) instanceof java.util.Map) {
-				sb.append(mapDump((java.util.Map) Array.get(array, i)));
-			} else {
-				sb.append(String.valueOf(Array.get(array, i)));
-			}
-			addComma = true;
-		}
-		sb.append(" ]");
-		return sb.toString();
 	}
 	*/
 

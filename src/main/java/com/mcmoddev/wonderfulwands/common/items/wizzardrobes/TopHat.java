@@ -21,7 +21,7 @@ import javax.annotation.Nonnull;
 public class TopHat extends ItemArmor {
 
 	public TopHat() {
-		super(WonderfulWands.NONARMOR, 0, EntityEquipmentSlot.HEAD);
+		super(WonderfulWands.NON_ARMOR, 0, EntityEquipmentSlot.HEAD);
 		this.setCreativeTab(WonderfulWands.TAB_ROBES);
 		this.setMaxDamage(100);
 	}
