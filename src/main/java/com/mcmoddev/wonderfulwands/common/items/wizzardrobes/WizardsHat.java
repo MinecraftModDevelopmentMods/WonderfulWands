@@ -49,7 +49,7 @@ public class WizardsHat extends ItemArmor {
 
 	public void setPotionEffectID(ItemStack src, String potionEffectCode) {
 		NBTTagCompound tag;
-		if (src.hasTagCompound() == false) {
+		if (!src.hasTagCompound()) {
 			tag = new NBTTagCompound();
 		} else {
 			tag = src.getTagCompound();
@@ -59,7 +59,7 @@ public class WizardsHat extends ItemArmor {
 	}
 
 	public String getPotionEffectID(ItemStack src) {
-		if (src.hasTagCompound() == false) return null;
+		if (!src.hasTagCompound()) return null;
 		NBTTagCompound tag = src.getTagCompound();
 		if (tag.hasKey("EffectID")) {
 			return tag.getString("EffectID");
@@ -70,7 +70,7 @@ public class WizardsHat extends ItemArmor {
 
 	public void setPotionEffectLevel(ItemStack src, int level) {
 		NBTTagCompound tag;
-		if (src.hasTagCompound() == false) {
+		if (!src.hasTagCompound()) {
 			tag = new NBTTagCompound();
 		} else {
 			tag = src.getTagCompound();
@@ -80,7 +80,7 @@ public class WizardsHat extends ItemArmor {
 	}
 
 	public int getPotionEffectLevel(ItemStack src) {
-		if (src.hasTagCompound() == false) return 0;
+		if (!src.hasTagCompound()) return 0;
 		NBTTagCompound tag = src.getTagCompound();
 		if (tag.hasKey("EffectLvl")) {
 			return tag.getByte("EffectLvl");
@@ -114,7 +114,7 @@ public class WizardsHat extends ItemArmor {
 		super.onArmorTick(world, player, src);
 		if (world.getTotalWorldTime() % (potionApplyInterval) == 0) {
 			if (this.getPotionEffectID(src) == null) {
-				if (player.getActivePotionEffects().isEmpty() == false) {
+				if (!player.getActivePotionEffects().isEmpty()) {
 					// soak up a potion effect
 					Collection<PotionEffect> c = player.getActivePotionEffects();
 					PotionEffect[] effect = c.toArray(new PotionEffect[c.size()]);
@@ -144,5 +144,4 @@ public class WizardsHat extends ItemArmor {
 			tooltip.add(I18n.translateToLocal(Potion.getPotionFromResourceLocation(potionID).getName()));
 		}
 	}
-
 }
