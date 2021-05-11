@@ -4,6 +4,7 @@ import com.mcmoddev.wonderfulwands.WonderfulWands;
 import com.mcmoddev.wonderfulwands.client.WizardHatRenderer;
 import com.mcmoddev.wonderfulwands.init.WonderfulConfig;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,7 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -143,12 +143,11 @@ public class WizardsHat extends ItemArmor {
 
 
 	@Override
-	@SuppressWarnings("deprecation")
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		String potionID = this.getPotionEffectID(stack);
 		if (potionID != null && Potion.getPotionFromResourceLocation(potionID) != null) {
-			tooltip.add(I18n.translateToLocal(Potion.getPotionFromResourceLocation(potionID).getName()));
+			tooltip.add(I18n.format(Objects.requireNonNull(Potion.getPotionFromResourceLocation(potionID)).getName()));
 		}
 	}
 }
