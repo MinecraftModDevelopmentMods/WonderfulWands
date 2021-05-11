@@ -60,6 +60,7 @@ public class BlockFeyRailPowered extends BlockRailPowered {
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
 		return Collections.emptyList();
 	}

@@ -41,12 +41,14 @@ public class BlockMageLight extends Block {
 
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
 		return NULL_AABB;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
+	@SuppressWarnings("deprecation")
 	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
 		return bounds.offset(pos);
 	}
@@ -61,11 +63,13 @@ public class BlockMageLight extends Block {
 	 * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
 	 */
 	@Override
+	@SuppressWarnings("deprecation")
 	public boolean isOpaqueCube(IBlockState bs) {
 		return false;
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public boolean isFullCube(IBlockState bs) {
 		return false;
 	}
@@ -85,7 +89,5 @@ public class BlockMageLight extends Block {
 		final double d4 = 0.27;
 
 		w.spawnParticle(EnumParticleTypes.FLAME, d0, d, d2, 0.0, 0.0, 0.0, new int[0]);
-
 	}
-
 }

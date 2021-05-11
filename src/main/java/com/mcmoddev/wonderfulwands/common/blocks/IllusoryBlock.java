@@ -98,6 +98,7 @@ public class IllusoryBlock extends Block {
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public boolean isFullCube(@Nonnull final IBlockState blockState) {
 		return false;
 	}
