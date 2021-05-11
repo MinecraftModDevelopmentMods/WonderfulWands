@@ -24,9 +24,8 @@ public class WitchesHat extends WizardsHat {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public ModelBiped getArmorModel(final EntityLivingBase entityLiving,
-									final ItemStack itemStack, final EntityEquipmentSlot armorSlot,
-									final ModelBiped biped) {
+	public ModelBiped getArmorModel(final EntityLivingBase entityLiving, final ItemStack itemStack,
+									final EntityEquipmentSlot armorSlot, final ModelBiped biped) {
 		return new WitchHatRenderer();
 	}
 }

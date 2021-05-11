@@ -2,6 +2,7 @@ package com.mcmoddev.wonderfulwands.common.items.wizzardrobes;
 
 import com.mcmoddev.wonderfulwands.WonderfulWands;
 import com.mcmoddev.wonderfulwands.client.WizardHatRenderer;
+import com.mcmoddev.wonderfulwands.init.WonderfulConfig;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -21,6 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Wizards and Witches hats are expensive head-slot items that are rendered in
@@ -91,7 +93,8 @@ public class WizardsHat extends ItemArmor {
 
 
 	@SideOnly(Side.CLIENT)
-	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped biped) {
+	public ModelBiped getArmorModel(EntityLivingBase entity, ItemStack item, EntityEquipmentSlot slot,
+									ModelBiped model) {
 		return new WizardHatRenderer();
 	}
 
@@ -112,31 +115,35 @@ public class WizardsHat extends ItemArmor {
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack src) {
 		super.onArmorTick(world, player, src);
-		if (world.getTotalWorldTime() % (potionApplyInterval) == 0) {
-			if (this.getPotionEffectID(src) == null) {
-				if (!player.getActivePotionEffects().isEmpty()) {
-					// soak up a potion effect
-					Collection<PotionEffect> c = player.getActivePotionEffects();
-					PotionEffect[] effect = c.toArray(new PotionEffect[c.size()]);
-					int i = world.rand.nextInt(effect.length);
-					String potionCode = effect[i].getPotion().getRegistryName().toString();
-					this.setPotionEffectID(src, potionCode);
-					this.setPotionEffectLevel(src, effect[i].getAmplifier());
-					player.removePotionEffect(effect[i].getPotion());
+		if (WonderfulConfig.enableHatEffects) {
+			if (world.getTotalWorldTime() % (potionApplyInterval) == 0) {
+				if (this.getPotionEffectID(src) == null) {
+					if (!player.getActivePotionEffects().isEmpty()) {
+						// soak up a potion effect
+						Collection<PotionEffect> c = player.getActivePotionEffects();
+						PotionEffect[] effect = c.toArray(new PotionEffect[c.size()]);
+						int i = world.rand.nextInt(effect.length);
+						String potionCode = Objects.requireNonNull(effect[i].getPotion().getRegistryName()).toString();
+						this.setPotionEffectID(src, potionCode);
+						this.setPotionEffectLevel(src, effect[i].getAmplifier());
+						player.removePotionEffect(effect[i].getPotion());
+					}
+				} else {
+					Potion pot = Potion.getPotionFromResourceLocation(this.getPotionEffectID(src));
+					if (pot == null) {
+						return;
+					}
+					int level = this.getPotionEffectLevel(src);
+					player.addPotionEffect(new PotionEffect(pot, potionDuration, level, false,
+						false));
 				}
-			} else {
-				Potion pot = Potion.getPotionFromResourceLocation(this.getPotionEffectID(src));
-				if (pot == null) {
-					return;
-				}
-				int level = this.getPotionEffectLevel(src);
-				player.addPotionEffect(new PotionEffect(pot, potionDuration, level, false, false));
 			}
 		}
 	}
 
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		String potionID = this.getPotionEffectID(stack);

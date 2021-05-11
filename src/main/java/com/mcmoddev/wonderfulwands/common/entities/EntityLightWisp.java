@@ -48,7 +48,7 @@ public class EntityLightWisp extends net.minecraft.entity.EntityLivingBase {
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound root) {
+	public void readFromNBT(@Nonnull NBTTagCompound root) {
 		super.readFromNBT(root);
 		if (root.hasKey("t")) {
 			this.lifeCounter = root.getShort("t");
@@ -57,8 +57,11 @@ public class EntityLightWisp extends net.minecraft.entity.EntityLivingBase {
 		}
 	}
 
+	@Nonnull
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound root) {
+	//TODO When the Wand of Darkness Bane is used this method crashes the game fully. Wolf says it's trying to add
+	//entity tracking but can't or something along those words (Not too sure about it myself so I'll disable the recipe)
+	public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound root) {
 		super.writeToNBT(root);
 		root.setShort("t", this.lifeCounter);
 		return root;
@@ -88,12 +91,15 @@ public class EntityLightWisp extends net.minecraft.entity.EntityLivingBase {
 		}
 	}
 
+	@Nonnull
 	@Override
+	@SuppressWarnings("unchecked")
 	public Iterable<ItemStack> getArmorInventoryList() {
 		return Collections.EMPTY_LIST;
 	}
 
 	@Override
+	@SuppressWarnings("NullableProblems")
 	public ItemStack getItemStackFromSlot(@Nonnull final EntityEquipmentSlot slot) {
 		return null;
 	}
@@ -103,6 +109,7 @@ public class EntityLightWisp extends net.minecraft.entity.EntityLivingBase {
 		// do nothing
 	}
 
+	@Nonnull
 	@Override
 	public EnumHandSide getPrimaryHand() {
 		return EnumHandSide.LEFT;
@@ -214,5 +221,4 @@ public class EntityLightWisp extends net.minecraft.entity.EntityLivingBase {
 			in[r] = o;
 		}
 	}
-
 }

@@ -13,17 +13,25 @@ public class WonderfulConfig {
 
 	private static final String LANG = WonderfulWands.MODID + ".config.";
 
-	@Config.LangKey(LANG + "altRecipes")
+	@Config.LangKey(LANG + "altRecipesEnabled")
 	@Config.Comment({"If true, then robes and wands will use different recipes than normal"})
 	@Config.RequiresMcRestart
-	public static boolean altRecipes = false;
+	public static boolean altRecipesEnabled = false;
 
 	@Config.LangKey(LANG + "enableHats")
-	@Config.Comment("If true, then the Wizard's Hat and Witch's Hat items will be craftable (if "
-		+ "false, the hats will not be craftable). These hats are very powerful and you "
-		+ "may want to disable them if you expect there to be troublemakers (aka "
-		+ "griefers)")
-	public static boolean enableHats = true;
+	@Config.Comment({"If true, magical hats will be craftable, if you wish to disable the "
+		+ "infinite potion side effect that the Witches and Wizards hat have then please set "
+		+ "'enableHatEffects' to false"})
+	@Config.RequiresMcRestart
+	public static boolean enableHatRecipes = true;
+
+	@Config.LangKey(LANG + "enableHatEffects")
+	@Config.Comment("If true, then the Wizard's Hat and Witch's Hat effects will be enabled (if "
+		+ "false, the hats will still be craftable but the effects will not work). "
+		+ "These hats are very powerful and you may want to disable them if you expect there to "
+		+ "be troublemakers (aka griefers)")
+	@Config.RequiresMcRestart
+	public static boolean enableHatEffects = true;
 
 	@Mod.EventBusSubscriber(modid = WonderfulWands.MODID)
 	private static class EventHandler {
