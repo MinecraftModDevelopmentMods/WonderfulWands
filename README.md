@@ -1,9 +1,9 @@
-# Cyano's Wonderful Wands
+[![](https://img.shields.io/badge/Discord-MMD-green.svg?style=flat-square&logo=Discord)](https://discord.mcmoddev.com)
+[![](http://cf.way2muchnoise.eu/full_drcyanos-wonderful-wands-wizarding-robes_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/drcyanos-wonderful-wands-wizarding-robes)
+[![](http://cf.way2muchnoise.eu/versions/Minecraft_drcyanos-wonderful-wands-wizarding-robes_all.svg)](https://www.curseforge.com/minecraft/mc-mods/drcyanos-wonderful-wands-wizarding-robes)
+
+#Cyano's Wonderful Wands
 This mod adds magical wands to Minecraft
 
-## Requirements
-This mod requires that you install Minecraft Forge version 1.9-10.16.0.1865 or later (ealier versions of Forge for Minecraft 1.9 may work, but no guarentees).
-
-## Installing
-After you have successfully installed Forge, simply place the file *wonderfulwands-#.#.jar* in your *mods* folder. You can get the wonderfulwands-#.#.jar file from the Releases tab of this repository page.
-
+##Requirements
+This mod requires Minecraft Forge.  

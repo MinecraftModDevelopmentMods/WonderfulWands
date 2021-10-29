@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "w",
+    "l"
+  ],
+  "key": {
+    "w": {
+      "item": "minecraft:wool",
+      "data": 15
+    },
+    "l": {
+      "item": "minecraft:leather"
+    }
+  },
+  "result": {
+    "item": "wonderfulwands:top_hat",
+    "count": 1
+  },
+  "conditions": [{
+      "type": "wonderfulwands:hatRecipeEnabled"
+  }]
+}

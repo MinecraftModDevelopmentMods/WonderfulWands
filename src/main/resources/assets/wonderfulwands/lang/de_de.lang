@@ -1,0 +1,114 @@
+item.wonderfulwands.wand_generic.name=Zauberstab ohne Magie
+item.wonderfulwands.wand_of_death.name=Tötliche Zauberstab
+item.wonderfulwands.wand_of_fire.name=Feuerball Zauberstab
+item.wonderfulwands.wand_of_growth.name=Bauer Zauberstab
+item.wonderfulwands.wand_of_harvesting.name=Mähdrescher Zauberstab
+item.wonderfulwands.wand_of_healing.name=Mediziner Zauberstab
+item.wonderfulwands.wand_of_ice.name=Eis Zauberstab
+item.wonderfulwands.wand_of_light.name=Hell Zauberstab
+item.wonderfulwands.wand_of_lightning.name=Blitzen Zauberstab
+item.wonderfulwands.wand_of_storm.name=Donner Zauberstab
+item.wonderfulwands.wand_of_mining.name=Gräber Zauberstab
+item.wonderfulwands.wand_of_missiles.name=Krieger Zauberstab
+item.wonderfulwands.wand_of_teleportation.name=Teleportieren Zauberstab
+item.wonderfulwands.wand_of_bridge.name=Brücke Zauberstab
+item.wonderfulwands.wand_of_climb.name=Efeu Zauberstab
+item.wonderfulwands.wand_of_greater_light.name=Lichterketten Zauberstab
+item.wonderfulwands.wand_of_illusion.name=Täuschung Zauberstab
+item.wonderfulwands.wand_of_levitation.name=Schweben Zauberstab
+item.wonderfulwands.wand_of_tunneling.name=Tunnelbau Zauberstab
+item.wonderfulwands.wand_of_webbing.name=Spinnwebe Zauberstab
+item.wonderfulwands.wand_of_rails.name=Eisenbahn Zauberstab
+
+item.wonderfulwands.wizards_hat.name=Zaubererhut
+item.wonderfulwands.witches_hat.name=Hexenhut
+item.wonderfulwands.top_hat.name=Zylinder
+
+item.wonderfulwands.robes_black_helmet.name=Schwarz Zaubererkappe
+item.wonderfulwands.robes_black_chestplate.name=Schwarz Zaubererrobe
+item.wonderfulwands.robes_black_leggings.name=Schwarz Zaubererhosen
+item.wonderfulwands.robes_black_boots.name=Schwarz Zaubererschuhe
+
+item.wonderfulwands.robes_red_helmet.name=Rot Zaubererkappe
+item.wonderfulwands.robes_red_chestplate.name=Rot Zaubererrobe
+item.wonderfulwands.robes_red_leggings.name=Rot Zaubererhosen
+item.wonderfulwands.robes_red_boots.name=Rot Zaubererschuhe
+
+item.wonderfulwands.robes_green_helmet.name=Grün Zaubererkappe
+item.wonderfulwands.robes_green_chestplate.name=Grün Zaubererrobe
+item.wonderfulwands.robes_green_leggings.name=Grün Zaubererhosen
+item.wonderfulwands.robes_green_boots.name=Grün Zaubererschuhe
+
+item.wonderfulwands.robes_brown_helmet.name=Braun Zaubererkappe
+item.wonderfulwands.robes_brown_chestplate.name=Braun Zaubererrobe
+item.wonderfulwands.robes_brown_leggings.name=Braun Zaubererhosen
+item.wonderfulwands.robes_brown_boots.name=Braun Zaubererschuhe
+
+item.wonderfulwands.robes_blue_helmet.name=Blau Zaubererkappe
+item.wonderfulwands.robes_blue_chestplate.name=Blau Zaubererrobe
+item.wonderfulwands.robes_blue_leggings.name=Blau Zaubererhosen
+item.wonderfulwands.robes_blue_boots.name=Blau Zaubererschuhe
+
+item.wonderfulwands.robes_purple_helmet.name=Violett Zaubererkappe
+item.wonderfulwands.robes_purple_chestplate.name=Violett Zaubererrobe
+item.wonderfulwands.robes_purple_leggings.name=Violett Zaubererhosen
+item.wonderfulwands.robes_purple_boots.name=Violett Zaubererschuhe
+
+item.wonderfulwands.robes_cyan_helmet.name=Cyan Zaubererkappe
+item.wonderfulwands.robes_cyan_chestplate.name=Cyan Zaubererrobe
+item.wonderfulwands.robes_cyan_leggings.name=Cyan Zaubererhosen
+item.wonderfulwands.robes_cyan_boots.name=Cyan Zaubererschuhe
+
+item.wonderfulwands.robes_silver_helmet.name=Grau Zaubererkappe
+item.wonderfulwands.robes_silver_chestplate.name=Grau Zaubererrobe
+item.wonderfulwands.robes_silver_leggings.name=Grau Zaubererhosen
+item.wonderfulwands.robes_silver_boots.name=Grau Zaubererschuhe
+
+item.wonderfulwands.robes_gray_helmet.name=Dunkel Zaubererkappe
+item.wonderfulwands.robes_gray_chestplate.name=Dunkel Zaubererrobe
+item.wonderfulwands.robes_gray_leggings.name=Dunkel Zaubererhosen
+item.wonderfulwands.robes_gray_boots.name=Dunkel Zaubererschuhe
+
+item.wonderfulwands.robes_pink_helmet.name=Rosa Zaubererkappe
+item.wonderfulwands.robes_pink_chestplate.name=Rosa Zaubererrobe
+item.wonderfulwands.robes_pink_leggings.name=Rosa Zaubererhosen
+item.wonderfulwands.robes_pink_boots.name=Rosa Zaubererschuhe
+
+item.wonderfulwands.robes_lime_helmet.name=Hellgrün Zaubererkappe
+item.wonderfulwands.robes_lime_chestplate.name=Hellgrün Zaubererrobe
+item.wonderfulwands.robes_lime_leggings.name=Hellgrün Zaubererhosen
+item.wonderfulwands.robes_lime_boots.name=Hellgrün Zaubererschuhe
+
+item.wonderfulwands.robes_yellow_helmet.name=Gelb Zaubererkappe
+item.wonderfulwands.robes_yellow_chestplate.name=Gelb Zaubererrobe
+item.wonderfulwands.robes_yellow_leggings.name=Gelb Zaubererhosen
+item.wonderfulwands.robes_yellow_boots.name=Gelb Zaubererschuhe
+
+item.wonderfulwands.robes_light_blue_helmet.name=Hellblau Zaubererkappe
+item.wonderfulwands.robes_light_blue_chestplate.name=Hellblau Zaubererrobe
+item.wonderfulwands.robes_light_blue_leggings.name=Hellblau Zaubererhosen
+item.wonderfulwands.robes_light_blue_boots.name=Hellblau Zaubererschuhe
+
+item.wonderfulwands.robes_magenta_helmet.name=Magenta Zaubererkappe
+item.wonderfulwands.robes_magenta_chestplate.name=Magenta Zaubererrobe
+item.wonderfulwands.robes_magenta_leggings.name=Magenta Zaubererhosen
+item.wonderfulwands.robes_magenta_boots.name=Magenta Zaubererschuhe
+
+item.wonderfulwands.robes_orange_helmet.name=Orange Zaubererkappe
+item.wonderfulwands.robes_orange_chestplate.name=Orange Zaubererrobe
+item.wonderfulwands.robes_orange_leggings.name=Orange Zaubererhosen
+item.wonderfulwands.robes_orange_boots.name=Orange Zaubererschuhe
+
+item.wonderfulwands.robes_white_helmet.name=Weiss Zaubererkappe
+item.wonderfulwands.robes_white_chestplate.name=Weiss Zaubererrobe
+item.wonderfulwands.robes_white_leggings.name=Weiss Zaubererhosen
+item.wonderfulwands.robes_white_boots.name=Weiss Zaubererschuhe
+
+entity.wonderfulwands.magic_missile.name=Zauberpfeil
+
+itemGroup.tab.wonderfulwands.armor=Zauberer Kleidung
+itemGroup.tab.wonderfulwands.wands=Zauberstäbe
+
+tile.wonderfulwands.mage_light.name=Zauberer Licht
+tile.wonderfulwands.fey_rail.name=Fee Bahngleis
+tile.wonderfulwands.fey_rail_powered.name=Schnell Fee Bahngleis

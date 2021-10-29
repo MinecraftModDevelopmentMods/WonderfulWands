@@ -1,0 +1,6 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "wonderfulwands:blocks/fey_rail_powered"
+    }
+}

@@ -1,0 +1,64 @@
+package com.mcmoddev.wonderfulwands.common.items.wands;
+
+import com.mcmoddev.wonderfulwands.common.blocks.IllusoryBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
+public class WandOfIllusions extends Wand {
+
+	public static int cooldown = 10;
+	public static int defaultCharges = 64;
+
+	public WandOfIllusions() {
+		super(defaultCharges);
+		this.setMaxDamage(defaultCharges + 1);
+	}
+
+	@Override
+	public int getBaseRepairCost() {
+		return 2;
+	}
+
+	@Override
+	public boolean onItemUse(ItemStack srcItemStack, EntityPlayer playerEntity, World world, BlockPos coord,
+							 EnumFacing blockFace, float par8, float par9, float par10) {
+		if (!playerEntity.capabilities.isCreativeMode) {
+			if (isOutOfCharge(srcItemStack)) {
+				// wand out of magic
+				playSound(noChargeAttackSound, world, playerEntity);
+				return true;
+			}
+		}
+		boolean success = convertBlock(playerEntity, world, coord);
+		if (success) {
+			playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, world, playerEntity);
+			if (!playerEntity.capabilities.isCreativeMode) {
+				srcItemStack.damageItem(1, playerEntity);
+			}
+		}
+		return success;
+	}
+
+	/**
+	 * turns block into illusion
+	 *
+	 * @param playerEntity
+	 * @param world
+	 * @return True if anything happened, false otherwise (invalid target)
+	 */
+	protected boolean convertBlock(EntityPlayer playerEntity, World world, BlockPos coord) {
+		IBlockState targetBlock = world.getBlockState(coord);
+		Block illusoryBlock = IllusoryBlock.getIllusionForBlock(targetBlock.getBlock());
+		if (illusoryBlock == null) return false;
+
+		IBlockState newBlock = illusoryBlock.getDefaultState();
+		world.setBlockState(coord, newBlock);
+		return true;
+	}
+}

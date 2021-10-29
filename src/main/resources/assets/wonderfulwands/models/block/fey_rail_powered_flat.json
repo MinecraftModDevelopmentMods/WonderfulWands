@@ -1,0 +1,6 @@
+{
+    "parent": "block/rail_flat",
+    "textures": {
+        "rail": "wonderfulwands:blocks/fey_rail_unpowered"
+    }
+}

@@ -1,0 +1,6 @@
+{
+  "conditions": {
+    "hatRecipeEnabled": "com.mcmoddev.wonderfulwands.util.HatRecipesEnabled",
+    "alternativeRecipesEnabled": "com.mcmoddev.wonderfulwands.util.AlternativeRecipesEnabled"
+  }
+}
